@@ -1,5 +1,7 @@
 # runAs
 
+The runAs tool provides an ability to run the Windows process under the specified windows user account.
+
 ## Ccommand line arguments
 
 | Argument | Description | Optional | Default value|
