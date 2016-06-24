@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<ParameterGroup>
+			<Url ParameterType="System.String" Required="true" />
+			<LocalFilePath ParameterType="System.String" Required="true"/>
+		</ParameterGroup>
+		<Task>
+		<Using Namespace="System"/>
+		<Using Namespace="System.IO"/>
+		<Using Namespace="System.Net"/>
+      	<Code Type="Fragment" Language="cs">
+			<![CDATA[		
+				try
+				{				
+					var dirName = Path.GetDirectoryName(LocalFilePath);
+					if (!Directory.Exists(dirName))	
+					{
+						Directory.CreateDirectory(dirName);
+					}
+
+					using (WebClient client = new WebClient())
+					{
+						client.DownloadFile(Url, LocalFilePath);
+					}
+				}
+				catch(Exception ex)
+				{
+					Log.LogMessage(MessageImportance.High, string.Format("##teamcity[buildProblem description='{0}' identity='{0}']", ex.Message));
+					throw;
+				}
+			]]>
+      	</Code>
+    	</Task>
+	</UsingTask>
+
+	<UsingTask TaskName="GetNUnitConsolePath" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<ParameterGroup>
+			<BaseDir ParameterType="System.String" Required="true" />
+			<PathToNUnitConsole ParameterType="System.String" Output="true"/>
+		</ParameterGroup>
+		<Task>
+		<Using Namespace="System"/>
+		<Using Namespace="System.IO"/>
+		<Using Namespace="System.Linq"/>
+      	<Code Type="Fragment" Language="cs">
+			<![CDATA[		
+				try
+				{					
+					var toolName = "nunit3-console.exe";
+					PathToNUnitConsole = Directory.EnumerateFiles(BaseDir, toolName, SearchOption.AllDirectories).FirstOrDefault();
+					if (string.IsNullOrWhiteSpace(PathToNUnitConsole))
+					{
+						throw new InvalidOperationException(string.Format("{0} was not found.", toolName));
+					}
+				}
+				catch(Exception ex)
+				{
+					Log.LogMessage(MessageImportance.High, string.Format("##teamcity[buildProblem description='{0}' identity='{0}']", ex.Message));
+					throw;
+				}
+			]]>
+      	</Code>
+    	</Task>
+	</UsingTask>
+
+	<UsingTask TaskName="CreateNUnitListOfAssemblies" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<ParameterGroup>
+			<Assemblies ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+			<RegexpAssemblyFilter ParameterType="System.String" Required="true" />
+			<ListOfAssemblies ParameterType="System.String" Output="true"/>
+		</ParameterGroup>
+		<Task>
+		<Using Namespace="System"/>
+		<Using Namespace="System.Linq"/>
+		<Using Namespace="System.Text.RegularExpressions"/>
+      	<Code Type="Fragment" Language="cs">
+			<![CDATA[							
+				try
+				{
+					var builder = new CommandLineBuilder();
+					var reg = new Regex(RegexpAssemblyFilter);
+					builder.AppendFileNamesIfNotNull((from assembly in Assemblies where reg.IsMatch(assembly.ItemSpec) select assembly).ToArray(), " ");
+					ListOfAssemblies = builder.ToString();
+					if (string.IsNullOrWhiteSpace(ListOfAssemblies))
+					{
+						throw new InvalidOperationException("Assemblies were not found.");
+					}
+				}
+				catch(Exception ex)
+				{
+					Log.LogMessage(MessageImportance.High, string.Format("##teamcity[buildProblem description='{0}' identity='{0}']", ex.Message));
+					throw;
+				}
+			]]>
+      	</Code>
+    	</Task>
+	</UsingTask>
+</Project>
