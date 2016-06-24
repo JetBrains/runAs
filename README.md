@@ -2,6 +2,8 @@
 
 The runAs tool provides an ability to run the Windows process under the specified windows user account.
 
+Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
+
 ## Ccommand line arguments
 
 | Argument | Description | Optional | Default value|
