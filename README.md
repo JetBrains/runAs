@@ -1,6 +1,6 @@
 # runAs
 
-The runAs tool provides an ability to run the Windows process under the specified windows user account.
+The runAs tool provides an ability to run the Windows process under the specified Windows user's account.
 
 Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
 
@@ -15,7 +15,7 @@ Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
 | -e: | set an environment variable in the format "name=value" | X | |
 | -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
 | -il: | [integrity level](https://msdn.microsoft.com/en-us/library/bb625963.aspx)(*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
-| -s: | show mode for the created process *hide* or *normal* or *show*) | X | *hide* |
+| -s: | show mode for the created process *hide* or *normal* or *show* | X | *hide* |
 | -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
 | -c: | text file, containing any configuration arguments | | |
 | executable | executable file | | |
