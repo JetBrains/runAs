@@ -1,16 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<Target Name="Build">
-		<CallTarget Targets="Rebuild"/>
-		<CallTarget Targets="Tests"/>
-	</Target>	
+	<UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<ParameterGroup>
+			<Url ParameterType="System.String" Required="true" />
+			<LocalFilePath ParameterType="System.String" Required="true"/>
+		</ParameterGroup>
+		<Task>
+		<Using Namespace="System"/>
+		<Using Namespace="System.IO"/>
+		<Using Namespace="System.Net"/>
+      	<Code Type="Fragment" Language="cs">
+			<![CDATA[		
+				try
+				{				
+					var dirName = Path.GetDirectoryName(LocalFilePath);
+					if (dirName != null && Directory.Exists(dirName))	
+					{
+						Directory.CreateDirectory(dirName);
+					}
+
+					using (WebClient client = new WebClient())
+					{
+						client.DownloadFile(Url, LocalFilePath);
+					}
+				}
+				catch(Exception ex)
+				{
+					Log.LogMessage(MessageImportance.High, string.Format("##teamcity[buildProblem description='{0}' identity='{0}']", ex.Message));
+					throw;
+				}
+			]]>
+      	</Code>
+    	</Task>
+	</UsingTask>
+
+	<Target Name="GetNuGet">
+		<DownloadFile
+	    	Url="https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+	    	LocalFilePath="nuget.exe"/>
+	</Target>
+
+	<Target Name="RestorePackages" DependsOnTargets="GetNuGet">
+		<Exec Command="nuget.exe restore runAs.sln"/>
+	</Target>
 
 	<Target Name="Rebuild">
 		<MSBuild Projects="JetBrains.runAs\JetBrains.runAs.vcxproj" Targets="Rebuild" Properties="Configuration=Release;Platform=x86;OutDir=..\bin\Release\x86\"/>
-		<MSBuild Projects="JetBrains.runAs\JetBrains.runAs.vcxproj" Targets="Rebuild" Properties="Configuration=Release;Platform=x64;OutDir=..\bin\Release\x64\"/>					
+		<MSBuild Projects="JetBrains.runAs\JetBrains.runAs.vcxproj" Targets="Rebuild" Properties="Configuration=Release;Platform=x64;OutDir=..\bin\Release\x64\"/>
 	</Target>	
 
-	<Target Name="Tests">
+	<Target Name="Tests" DependsOnTargets="RestorePackages">
 		<MSBuild Projects="tests.proj" Targets="Tests"/>
 	</Target>
+
+	<Target Name="Build" DependsOnTargets="Rebuild;Tests"/>
 </Project>
