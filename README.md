@@ -26,7 +26,7 @@ Or another one example that doing the same thing:
 
 `JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt`
 
-where "MyConfig.txt" is a text file containing the following lines:
+where _"MyConfig.txt"_ is a text file containing the following lines:
 ```
 -u:SomeDomain\SomeUserName
 WhoAmI.exe
