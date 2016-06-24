@@ -27,10 +27,12 @@
 *.exe
 *.out
 *.app
-JetBrains.runAs.IntegrationTests/
 JetBrains.runAs/temp/
 bin/
 packages/
 temp/
 ipch/
 *.sdf
+JetBrains.runAs.IntegrationTests/obj/
+*.opendb
+*.db
