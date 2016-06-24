@@ -19,6 +19,7 @@ The runAs tool provides an ability to run the Windows process under the specifie
 | command_line_args | command line arguments, the maximum total length of *executable* and *command_line_args* is 1024 characters | X | empty |
 
 For example: `JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt`
+
 where "MyConfig.txt" is a text file containing the following lines:
 ```
 -u:SomeDomain\SomeUserName
