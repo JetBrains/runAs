@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+	<metadata>
+		<id>JetBrains.runAs</id>
+		<title>JetBrains runAs tool.</title>
+		<language>en-us</language>
+		<version>$version$</version>
+		<authors>NikolayP</authors>
+		<owners>JetBrains</owners>
+		<licenseUrl>https://github.com/JetBrains/runAs/blob/master/LICENSE</licenseUrl>
+		<projectUrl>https://github.com/JetBrains/runAs</projectUrl>
+		<iconUrl>https://www.jetbrains.com/_assets//shared/favicons/jetbrains.ico</iconUrl>
+		<!--requireLicenseAcceptance>false</requireLicenseAcceptance-->
+		<description>The runAs tool provides an ability to run the Windows process under the specified Windows user's account.</description>
+		<tags>JetBrains runAs tool</tags>
+	</metadata>
+	<files>
+  		<file src="bin\Release\x64\JetBrains.runAs.exe" target="tools\x64" />
+		<file src="bin\Release\x86\JetBrains.runAs.exe" target="tools\x86" />
+		<file src="README.md" target="tools\README.md" />
+	</files>
+</package>
