@@ -6,17 +6,25 @@ The runAs tool provides an ability to run the Windows process under the specifie
 
 | Argument | Description | Optional | Default value|
 | ------------- |:-------------:|:-------------:|:-------------:|
-| -u:user_name  | *"user"* or *"domain\user"* or *"user@domain"* |||
-| -p:password   | user's password | X | empty |
-| -w:working_directory | current directory | X | empty |
-| -b:exit_code_base | base number for exit code | X | -100000 |
-| -e:environment_var | set an environment variable in the format "name=value" | X | |
-| -l:log_level | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
-| -il:integrity_level | [integrity level](https://msdn.microsoft.com/en-us/library/bb625963.aspx)(*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
-| -i:inheritance_mode |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
-| -c:configuration_file | text file, containing any configuration arguments | | |
+| -u:  | *"user"* or *"domain\user"* or *"user@domain"* |||
+| -p:   | user's password | X | empty |
+| -w: | current directory | X | empty |
+| -b: | base number for exit code | X | -100000 |
+| -e: | set an environment variable in the format "name=value" | X | |
+| -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
+| -il: | [integrity level](https://msdn.microsoft.com/en-us/library/bb625963.aspx)(*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
+| -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
+| -c: | text file, containing any configuration arguments | | |
 | executable | executable file | | |
 | command_line_args | command line arguments, the maximum total length of *executable* and *command_line_args* is 1024 characters | X | empty |
+
+For example: `JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt`
+where "MyConfig.txt" is a text file containing the following lines:
+```
+-u:SomeDomain\SomeUserName
+WhoAmI.exe
+/ALL
+```
 
 ## Some comments
 
