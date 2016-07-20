@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ProcessTracker.h"
 #include <thread>
-#include <chrono>
 #include "Result.h"
 #include "ExitCode.h"
 #include "Trace.h"
@@ -46,7 +45,7 @@ Result<ExitCode> ProcessTracker::WaiteForExit(HANDLE processHandle, Trace& trace
 	bool hasData;
 	do
 	{
-		this_thread::sleep_for(chrono::milliseconds(0));
+		Sleep(1);
 		auto hasData1 = RedirectStream(_stdOutPipe.GetReader(), _outputWriter);
 		if(hasData1.HasError())
 		{
