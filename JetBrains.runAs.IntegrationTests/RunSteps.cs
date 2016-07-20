@@ -94,7 +94,7 @@
 		{
 			var separator = new[] { Environment.NewLine };
 			var lines = new List<string>(text.Split(separator, StringSplitOptions.None));
-			var allParrents = new List<Regex>(table.Rows.Select(i => new Regex(i[""], RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.CultureInvariant | RegexOptions.Compiled)));
+			var allParrents = new List<Regex>(table.Rows.Select(i => new Regex(i[""], RegexOptions.Singleline | RegexOptions.CultureInvariant | RegexOptions.Compiled)));
 		    var notMatched = allParrents.ToList();
             var matched = new List<Regex>();
 

@@ -18,8 +18,8 @@ namespace JetBrains.runAs.IntegrationTests
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.0.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("Environment\'s inheritence")]
-    public partial class EnvironmentSInheritenceFeature
+    [NUnit.Framework.DescriptionAttribute("Inherit eenvironment variables")]
+    public partial class InheritEenvironmentVariablesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
@@ -31,7 +31,7 @@ namespace JetBrains.runAs.IntegrationTests
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Environment\'s inheritence", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Inherit eenvironment variables", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -179,16 +179,19 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("RunAs tool combines PATH environment variable in auto mode, first is target PATH," +
             " second is initial PATH")]
-        public virtual void RunAsToolCombinesPATHEnvironmentVariableInAutoModeFirstIsTargetPATHSecondIsInitialPATH()
+        [NUnit.Framework.TestCaseAttribute("PATH", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("Path", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("path", new string[0])]
+        public virtual void RunAsToolCombinesPATHEnvironmentVariableInAutoModeFirstIsTargetPATHSecondIsInitialPATH(string pathVarName, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs tool combines PATH environment variable in auto mode, first is target PATH," +
-                    " second is initial PATH", ((string[])(null)));
+                    " second is initial PATH", exampleTags);
 #line 61
 this.ScenarioSetup(scenarioInfo);
 #line 62
  testRunner.Given("I have appended the file command.cmd by the line @echo MyPath=\"%PATH%\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 63
- testRunner.And("I\'ve defined the Path environment variable by the value Path 1;path2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I\'ve defined the {0} environment variable by the value Path 1;path2", pathVarName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 64
  testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 65
@@ -208,6 +211,42 @@ this.ScenarioSetup(scenarioInfo);
                         "MyPath=\".+;Path 1;path2\""});
 #line 70
  testRunner.And("the output should contain:", ((string)(null)), table4, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Tool does not change case of environment variable")]
+        [NUnit.Framework.TestCaseAttribute("on", "^TestEnvVar=TestValue$", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("auto", "^TestEnvVar=TestValue$", new string[0])]
+        public virtual void ToolDoesNotChangeCaseOfEnvironmentVariable(string inhetritEnvironment, string output, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tool does not change case of environment variable", exampleTags);
+#line 81
+this.ScenarioSetup(scenarioInfo);
+#line 82
+ testRunner.Given("I have appended the file command.cmd by the line SET", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 83
+ testRunner.And("I\'ve defined the TestEnvVar environment variable by the value TestValue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 84
+ testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 85
+ testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 86
+ testRunner.And(string.Format("I\'ve added the argument -i:{0}", inhetritEnvironment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 87
+ testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 88
+ testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 89
+ testRunner.Then("the exit code should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table5.AddRow(new string[] {
+                        string.Format("{0}", output)});
+#line 90
+ testRunner.And("the output should contain:", ((string)(null)), table5, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

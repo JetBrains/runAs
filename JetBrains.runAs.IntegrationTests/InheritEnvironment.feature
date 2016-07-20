@@ -1,4 +1,4 @@
-﻿Feature: Environment's inheritence
+﻿Feature: Inherit eenvironment variables
 
 Scenario Outline: User runs the command using diferent modes of environment's inheritence
 	Given I have appended the file command.cmd by the line @echo TestEnvVar="%TestEnvVar%"
@@ -58,9 +58,9 @@ Examples:
 	| USERNAME                  |
 	| USERPROFILE               |
 
-Scenario: RunAs tool combines PATH environment variable in auto mode, first is target PATH, second is initial PATH
+Scenario Outline: RunAs tool combines PATH environment variable in auto mode, first is target PATH, second is initial PATH
 	Given I have appended the file command.cmd by the line @echo MyPath="%PATH%"
-	And I've defined the Path environment variable by the value Path 1;path2
+	And I've defined the <pathVarName> environment variable by the value Path 1;path2
 	And I've added the argument -u:RunAsTestUser
 	And I've added the argument -p:aaa
 	And I've added the argument -i:auto
@@ -70,3 +70,28 @@ Scenario: RunAs tool combines PATH environment variable in auto mode, first is t
 	And the output should contain:
 	|                          |
 	| MyPath=".+;Path 1;path2" |
+
+Examples:
+	| pathVarName |
+	| PATH        |
+	| Path        |
+	| path        |
+
+
+Scenario Outline: Tool does not change case of environment variable
+	Given I have appended the file command.cmd by the line SET
+	And I've defined the TestEnvVar environment variable by the value TestValue
+	And I've added the argument -u:RunAsTestUser
+	And I've added the argument -p:aaa
+	And I've added the argument -i:<inhetritEnvironment>
+	And I've added the argument command.cmd
+	When I run RunAs tool
+	Then the exit code should be 0
+	And the output should contain:
+	|          |
+	| <output> |
+
+Examples:
+	| inhetritEnvironment | output               |
+	| on                  | ^TestEnvVar=TestValue$ |
+	| auto                | ^TestEnvVar=TestValue$ |

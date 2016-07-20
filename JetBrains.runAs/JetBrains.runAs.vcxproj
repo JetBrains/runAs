@@ -184,6 +184,7 @@
   <ItemGroup>
     <ClInclude Include="AccountSid.h" />
     <ClInclude Include="Args.h" />
+    <ClInclude Include="CaseInsensitiveComparer.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="ProcessesSelector.h" />
     <ClInclude Include="SelfTest.h" />
@@ -224,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AccountSid.cpp" />
+    <ClCompile Include="CaseInsensitiveComparer.cpp" />
     <ClCompile Include="Error.cpp" />
     <ClCompile Include="ProcessesSelector.cpp" />
     <ClCompile Include="SelfTest.cpp" />

@@ -10,7 +10,7 @@ Scenario: User runs the command under the specific user account
 	And the output should contain:
 	|                |
 	| WhoAmI.exe     |
-	| .+\\\\RunAsTestUser |
+	| .+\\\\runastestuser |
 
 Scenario Outline: User runs the command which contains spaces in the path
 	Given I have appended the file <cmdFileName> by the line WhoAmI.exe
@@ -25,7 +25,7 @@ Scenario Outline: User runs the command which contains spaces in the path
 	And the output should contain:
 	|                |
 	| WhoAmI.exe     |
-	| .+\\\\RunAsTestUser |
+	| .+\\\\runastestuser |
 
 Examples:
 	| cmdFileName            | args         |
@@ -55,7 +55,7 @@ Scenario Outline: User runs the command which contains spaces in the path via co
 	And the output should contain:
 	|                |
 	| WhoAmI.exe     |
-	| .+\\\\RunAsTestUser |
+	| .+\\\\runastestuser |
 
 Examples:
 	| cmdFileName            | args         |
@@ -83,7 +83,7 @@ Scenario Outline: User runs using config file for args
 	And the output should contain:
 	|                |
 	| WhoAmI.exe     |
-	| .+\\\\RunAsTestUser |
+	| .+\\\\runastestuser |
 
 Examples:
 	| argsFile |
@@ -142,7 +142,7 @@ Scenario Outline: RunAs returns the exit code from the target command
 	And the output should contain:
 	|                |
 	| WhoAmI.exe     |
-	| .+\\\\RunAsTestUser |
+	| .+\\\\runastestuser |
 
 Examples:
 	| exitCode  |

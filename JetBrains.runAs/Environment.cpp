@@ -10,7 +10,7 @@ static const wregex EnvVarRegex = wregex(L"(.+)=(.*)");
 static const wstring UserProfileEnvVarName = L"USERPROFILE";
 static const wstring PathEnvVarName = L"PATH";
 // In upper case
-static const set<wstring> AutoOverrides = {
+static const set<wstring, CaseInsensitiveComparer> AutoOverrides = {
 	L"USERDOMAIN",
 	L"USERDOMAIN_ROAMINGPROFILE",
 	L"USERNAME",
@@ -74,7 +74,7 @@ Environment Environment::CreateFormList(const list<wstring>& variables, Trace& t
 			continue;
 		}
 
-		auto envName = StringUtilities::Convert(matchResult._At(1).str(), toupper);
+		auto envName = matchResult._At(1).str();
 		auto envValue = matchResult._At(2).str();
 		environment._vars[envName] = envValue;
 		environment._empty = false;
@@ -96,7 +96,7 @@ Environment Environment::Override(const Environment& baseEnvironment, const Envi
 		TraceVarible(trace, varsIterator->first, varsIterator->second);		
 	}
 
-	auto userProfileInLowCase = StringUtilities::Convert(overridedEnvironment._vars[UserProfileEnvVarName], tolower);
+	auto userProfile = overridedEnvironment._vars[UserProfileEnvVarName];
 
 	trace < L"Environment::Override environment variables from source environment";
 	for (auto varsIterator = sourceEnvironment._vars.begin(); varsIterator != sourceEnvironment._vars.end(); ++varsIterator)
@@ -104,11 +104,9 @@ Environment Environment::Override(const Environment& baseEnvironment, const Envi
 		auto name = varsIterator->first;
 		auto value = varsIterator->second;
 		auto overridedValue = overridedEnvironment._vars[name];
-		auto valueInLowCase = StringUtilities::Convert(value, tolower);
-		auto overridedValueInLowCase = StringUtilities::Convert(overridedValue, tolower);
 		
 		// Concat paths
-		if (name == PathEnvVarName)
+		if (StringUtilities::Convert(name, toupper) == PathEnvVarName)
 		{
 			value = value + (overridedValue.length() > 0 && value.length() > 0 ? L";" : L"") + overridedValue;
 			overridedEnvironment._vars[name] = value;
@@ -117,7 +115,7 @@ Environment Environment::Override(const Environment& baseEnvironment, const Envi
 		}
 		
 		// Override values when AutoOverrides all value containts a path to userProfile
-		if (AutoOverrides.find(name) != AutoOverrides.end() || overridedValueInLowCase.find(userProfileInLowCase) != wstring::npos)
+		if (AutoOverrides.find(name) != AutoOverrides.end() || overridedValue.find(userProfile) != wstring::npos)
 		{
 			overridedEnvironment._vars[name] = value;
 			TraceVarible(trace, name, value);
@@ -180,7 +178,7 @@ void Environment::CreateVariableMap(LPVOID environment, Trace& trace)
 			continue;
 		}
 
-		auto envName = StringUtilities::Convert(matchResult._At(1).str(), toupper);;
+		auto envName = matchResult._At(1).str();
 		auto envValue = matchResult._At(2).str();
 		_vars[envName] = envValue;
 		TraceVarible(trace, envName, envValue);

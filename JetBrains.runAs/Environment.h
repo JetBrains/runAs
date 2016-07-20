@@ -3,13 +3,14 @@
 #include <map>
 #include "Result.h"
 #include "Handle.h"
+#include "CaseInsensitiveComparer.h"
 
 class Trace;
 
 class Environment
 {		
 	list<LPVOID*> _environmentBlocks;
-	map<wstring, wstring> _vars;
+	map<wstring, wstring, CaseInsensitiveComparer> _vars;
 	bool _empty = true;
 	void CreateVariableMap(LPVOID environment, Trace& trace);
 	LPVOID* CreateEnvironmentFromMap();

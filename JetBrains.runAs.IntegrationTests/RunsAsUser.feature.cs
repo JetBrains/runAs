@@ -88,7 +88,7 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "WhoAmI.exe"});
             table1.AddRow(new string[] {
-                        ".+\\\\RunAsTestUser"});
+                        ".+\\\\runastestuser"});
 #line 10
  testRunner.And("the output should contain:", ((string)(null)), table1, "And ");
 #line hidden
@@ -137,7 +137,7 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "WhoAmI.exe"});
             table2.AddRow(new string[] {
-                        ".+\\\\RunAsTestUser"});
+                        ".+\\\\runastestuser"});
 #line 25
  testRunner.And("the output should contain:", ((string)(null)), table2, "And ");
 #line hidden
@@ -189,7 +189,7 @@ this.ScenarioSetup(scenarioInfo);
             table3.AddRow(new string[] {
                         "WhoAmI.exe"});
             table3.AddRow(new string[] {
-                        ".+\\\\RunAsTestUser"});
+                        ".+\\\\runastestuser"});
 #line 55
  testRunner.And("the output should contain:", ((string)(null)), table3, "And ");
 #line hidden
@@ -225,7 +225,7 @@ this.ScenarioSetup(scenarioInfo);
             table4.AddRow(new string[] {
                         "WhoAmI.exe"});
             table4.AddRow(new string[] {
-                        ".+\\\\RunAsTestUser"});
+                        ".+\\\\runastestuser"});
 #line 83
  testRunner.And("the output should contain:", ((string)(null)), table4, "And ");
 #line hidden
@@ -370,7 +370,7 @@ this.ScenarioSetup(scenarioInfo);
             table8.AddRow(new string[] {
                         "WhoAmI.exe"});
             table8.AddRow(new string[] {
-                        ".+\\\\RunAsTestUser"});
+                        ".+\\\\runastestuser"});
 #line 142
  testRunner.And("the output should contain:", ((string)(null)), table8, "And ");
 #line hidden
