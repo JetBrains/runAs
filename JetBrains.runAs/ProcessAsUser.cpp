@@ -137,7 +137,9 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 		return result;
 	}
 
-	// ReSharper disable once CppInitializedValueIsAlwaysRewritten
+	// ReSharper disable CppInitializedValueIsAlwaysRewritten
+	// ReSharper disable CppEntityAssignedButNoRead
+	
 	auto processHandle = Handle(L"Service Process");
 	processHandle = processInformation.hProcess;
 	

@@ -44,7 +44,7 @@ wstring HelpUtilities::GetHelp()
 	help << endl << L"JetBrains.runAs.exe arguments";
 	help << endl << L"where the arguments are:";
 	
-	help << endl << L"\t-u:" << ARG_USER_NAME << "\t\t- \"user\" or \"domain\\user\" or \"user@domain\".";
+	help << endl << L"\t-u:" << ARG_USER_NAME << "\t\t- \"user\" or \"domain\\user\" or \"user@domain\", optional and empty by default.";
 	
 	help << endl << L"\t-p:" << ARG_PASSWORD << "\t\t- user's password, optional and empty by default.";
 	

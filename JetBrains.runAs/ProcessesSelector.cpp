@@ -13,6 +13,14 @@ const Result<queue<const IProcess*>> ProcessesSelector::SelectProcesses(const Se
 	Trace trace(settings.GetLogLevel());
 	trace < L"ProcessesSelector::SelectProcesses";
 
+	queue<const IProcess*> processes;
+	if(settings.GetUserName() == L"")
+	{		
+		trace < L"ProcessesSelector::SelectProcesses push Process";
+		processes.push(&_newProcess);
+		return processes;
+	}
+
 	const SelfTest selfTest;
 	auto selfTestStatisticResult = selfTest.GetStatistic(settings);
 	if (selfTestStatisticResult.HasError())
@@ -27,8 +35,7 @@ const Result<queue<const IProcess*>> ProcessesSelector::SelectProcesses(const Se
 
 	trace < L"ProcessesSelector::SelectProcesses statistic.GetIntegrityLevel() = ";
 	trace << statistic.GetIntegrityLevel();
-		
-	queue<const IProcess*> processes;	
+			
 	if (statistic.IsService())
 	{
 		auto elevationIsRequired = settings.GetIntegrityLevel() == INTEGRITY_LEVEL_SYSTEM || settings.GetIntegrityLevel() == INTEGRITY_LEVEL_HIGH;

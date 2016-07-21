@@ -8,8 +8,8 @@ Scenario: User runs the command under the specific user account
 	When I run RunAs tool
 	Then the exit code should be 0
 	And the output should contain:
-	|                |
-	| WhoAmI.exe     |
+	|                     |
+	| WhoAmI.exe          |
 	| .+\\\\runastestuser |
 
 Scenario Outline: User runs the command which contains spaces in the path
@@ -169,3 +169,9 @@ Scenario: User runs with long args
 	And I've added the argument -c:args.txt	
 	When I run RunAs tool
 	Then the exit code should be 0
+
+Scenario: User runs the command under the current user account
+	Given I have appended the file command.cmd by the line exit 99
+	And I've added the argument command.cmd
+	When I run RunAs tool
+	Then the exit code should be 99	

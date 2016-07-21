@@ -19,9 +19,9 @@ static const wstring FalseStr = L"false";
 Result<Settings> CommanLineParser::TryParse(const list<wstring>& args, ExitCode* exitCodeBase, LogLevel* logLevel) const
 {
 	auto actualArgs = list<wstring>(args);
-	wstring userName;
-	wstring domain;
-	wstring password;
+	wstring userName = L"";
+	wstring domain = L"";
+	wstring password = L"";
 	wstring executable;
 	wstring workingDirectory;
 	*exitCodeBase = EXIT_CODE_BASE;
@@ -206,11 +206,6 @@ Result<Settings> CommanLineParser::TryParse(const list<wstring>& args, ExitCode*
 	}
 
 	list<wstring> emptyArgs;
-	if (userName == L"")
-	{		
-		emptyArgs.push_back(ARG_USER_NAME);
-	}	
-
 	if (executable == L"")
 	{
 		emptyArgs.push_back(ARG_EXECUTABLE);		

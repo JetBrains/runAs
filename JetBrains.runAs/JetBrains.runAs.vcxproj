@@ -186,6 +186,7 @@
     <ClInclude Include="Args.h" />
     <ClInclude Include="CaseInsensitiveComparer.h" />
     <ClInclude Include="Error.h" />
+    <ClInclude Include="NewProcess.h" />
     <ClInclude Include="ProcessesSelector.h" />
     <ClInclude Include="SelfTest.h" />
     <ClInclude Include="SelfTestStatistic.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="AccountSid.cpp" />
     <ClCompile Include="CaseInsensitiveComparer.cpp" />
     <ClCompile Include="Error.cpp" />
+    <ClCompile Include="NewProcess.cpp" />
     <ClCompile Include="ProcessesSelector.cpp" />
     <ClCompile Include="SelfTest.cpp" />
     <ClCompile Include="SelfTestStatistic.cpp" />

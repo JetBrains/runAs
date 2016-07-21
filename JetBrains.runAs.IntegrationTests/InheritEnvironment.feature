@@ -95,3 +95,45 @@ Examples:
 	| inhetritEnvironment | output               |
 	| on                  | ^TestEnvVar=TestValue$ |
 	| auto                | ^TestEnvVar=TestValue$ |
+
+Scenario Outline: User specifies environment variable via command line
+	Given I have appended the file command.cmd by the line @echo TestEnvVar="%TestEnvVar%"
+	And I've added the argument "-e:TestEnvVar=<value>"
+	And I've added the argument -u:RunAsTestUser
+	And I've added the argument -p:aaa
+	And I've added the argument -i:<inhetritEnvironment>
+	And I've added the argument command.cmd
+	When I run RunAs tool
+	Then the exit code should be 0
+	And the output should contain:
+	|          |
+	| <output> |
+
+Examples:
+	| inhetritEnvironment | value      | output                  |
+	| on                  | TestValue  | TestEnvVar="TestValue"  |
+	| off                 | TestValue  | TestEnvVar="TestValue"  |
+	| auto                | TestValue  | TestEnvVar="TestValue"  |
+	| on                  | Test Value | TestEnvVar="Test Value" |
+	| off                 | Test Value | TestEnvVar="Test Value" |
+	| auto                | Test Value | TestEnvVar="Test Value" |
+
+Scenario Outline: User specifies environment variable via command line for current user
+	Given I have appended the file command.cmd by the line @echo TestEnvVar="%TestEnvVar%"
+	And I've added the argument "-e:TestEnvVar=<value>"
+	And I've added the argument -i:<inhetritEnvironment>
+	And I've added the argument command.cmd
+	When I run RunAs tool
+	Then the exit code should be 0
+	And the output should contain:
+	|          |
+	| <output> |
+
+Examples:
+	| inhetritEnvironment | value      | output                  |
+	| on                  | TestValue  | TestEnvVar="TestValue"  |
+	| off                 | TestValue  | TestEnvVar="TestValue"  |
+	| auto                | TestValue  | TestEnvVar="TestValue"  |
+	| on                  | Test Value | TestEnvVar="Test Value" |
+	| off                 | Test Value | TestEnvVar="Test Value" |
+	| auto                | Test Value | TestEnvVar="Test Value" |

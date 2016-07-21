@@ -428,6 +428,25 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User runs the command under the current user account")]
+        public virtual void UserRunsTheCommandUnderTheCurrentUserAccount()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User runs the command under the current user account", ((string[])(null)));
+#line 173
+this.ScenarioSetup(scenarioInfo);
+#line 174
+ testRunner.Given("I have appended the file command.cmd by the line exit 99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 175
+ testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 176
+ testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 177
+ testRunner.Then("the exit code should be 99", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore

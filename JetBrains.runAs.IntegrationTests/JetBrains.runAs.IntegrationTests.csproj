@@ -75,6 +75,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="SpecifyIntegrityLevel.feature.cs">
+      <DependentUpon>SpecifyIntegrityLevel.feature</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="ShowLog.feature.cs">
       <DependentUpon>ShowLog.feature</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -108,6 +113,10 @@
     <None Include="InheritEnvironment.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>InheritEnvironment.feature.cs</LastGenOutput>
+    </None>
+    <None Include="SpecifyIntegrityLevel.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SpecifyIntegrityLevel.feature.cs</LastGenOutput>
     </None>
     <None Include="ShowLog.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

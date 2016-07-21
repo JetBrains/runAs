@@ -64,20 +64,20 @@ namespace JetBrains.runAs.IntegrationTests
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("RunAs returns -201 exit code and shows error message when user runs without user " +
-            "name arg")]
-        public virtual void RunAsReturns_201ExitCodeAndShowsErrorMessageWhenUserRunsWithoutUserNameArg()
+        [NUnit.Framework.DescriptionAttribute("RunAs returns -201 exit code and shows error message when user runs without execu" +
+            "rable arg")]
+        public virtual void RunAsReturns_201ExitCodeAndShowsErrorMessageWhenUserRunsWithoutExecurableArg()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns -201 exit code and shows error message when user runs without user " +
-                    "name arg", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns -201 exit code and shows error message when user runs without execu" +
+                    "rable arg", ((string[])(null)));
 #line 3
 this.ScenarioSetup(scenarioInfo);
 #line 4
  testRunner.Given("I have appended the file command.cmd by the line WhoAmI.exe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 5
- testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 6
- testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 7
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 8
@@ -86,70 +86,9 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table1.AddRow(new string[] {
-                        "Error:.*\"user_name\" should not be empty"});
+                        "Error:.*\"executable\" should not be empty"});
 #line 9
  testRunner.And("the errors should contain:", ((string)(null)), table1, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("RunAs returns -201 exit code and shows error message when user runs without execu" +
-            "rable arg")]
-        public virtual void RunAsReturns_201ExitCodeAndShowsErrorMessageWhenUserRunsWithoutExecurableArg()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns -201 exit code and shows error message when user runs without execu" +
-                    "rable arg", ((string[])(null)));
-#line 13
-this.ScenarioSetup(scenarioInfo);
-#line 14
- testRunner.Given("I have appended the file command.cmd by the line WhoAmI.exe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 15
- testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 16
- testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 17
- testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
- testRunner.Then("the exit code should be -100001", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        ""});
-            table2.AddRow(new string[] {
-                        "Error:.*\"executable\" should not be empty"});
-#line 19
- testRunner.And("the errors should contain:", ((string)(null)), table2, "And ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("RunAs returns -201 exit code and shows error message when user add cmd args not i" +
-            "n the end via config file for args")]
-        public virtual void RunAsReturns_201ExitCodeAndShowsErrorMessageWhenUserAddCmdArgsNotInTheEndViaConfigFileForArgs()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns -201 exit code and shows error message when user add cmd args not i" +
-                    "n the end via config file for args", ((string[])(null)));
-#line 23
-this.ScenarioSetup(scenarioInfo);
-#line 24
- testRunner.Given("I have appended the file command.cmd by the line @echo %1 %2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 25
- testRunner.And("I have appended the file args.txt by the line -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 26
- testRunner.And("I have appended the file args.txt by the line command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 27
- testRunner.And("I have appended the file args.txt by the line hello", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
- testRunner.And("I have appended the file args.txt by the line \"world !!!\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
- testRunner.And("I\'ve added the argument -c:args.txt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
- testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
- testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
- testRunner.Then("the exit code should be -100001", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -161,25 +100,25 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns -201 exit code and shows error message when user add cmd args not i" +
                     "n the", ((string[])(null)));
-#line 34
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 35
+#line 14
  testRunner.Given("I have appended the file command.cmd by the line @echo %1 %2", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 36
+#line 15
  testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 37
+#line 16
  testRunner.And("I\'ve added the argument -c:args.txt", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 38
+#line 17
  testRunner.And("I\'ve added the argument hello", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 39
+#line 18
  testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
+#line 19
  testRunner.And("I\'ve added the argument \"world !!!\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
+#line 20
  testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
+#line 21
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 43
+#line 22
  testRunner.Then("the exit code should be -100001", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -187,25 +126,27 @@ this.ScenarioSetup(scenarioInfo);
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("RunAs returns error exit code with specified exit code base")]
-        [NUnit.Framework.TestCaseAttribute("-200", "-201", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("-0", "-1", new string[0])]
-        [NUnit.Framework.TestCaseAttribute("200", "201", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("-200", "-202", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("-0", "-2", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("200", "202", new string[0])]
         public virtual void RunAsReturnsErrorExitCodeWithSpecifiedExitCodeBase(string exitCodeBase, string exitCode, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("RunAs returns error exit code with specified exit code base", exampleTags);
-#line 45
+#line 24
 this.ScenarioSetup(scenarioInfo);
-#line 46
+#line 25
  testRunner.Given("I have appended the file command.cmd by the line WhoAmI.exe", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 47
+#line 26
+ testRunner.And("I\'ve added the argument -u:abcdxxxxxxxxx", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 27
  testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 48
+#line 28
  testRunner.And(string.Format("I\'ve added the argument -b:{0}", exitCodeBase), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 49
+#line 29
  testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 50
+#line 30
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 51
+#line 31
  testRunner.Then(string.Format("the exit code should be {0}", exitCode), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -219,31 +160,31 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void UserRunsTheCommandWhithInvalidArgForTheInheritedEnvironment(string inhetritEnvironment, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User runs the command whith invalid arg for the inherited environment", exampleTags);
-#line 59
+#line 39
 this.ScenarioSetup(scenarioInfo);
-#line 60
+#line 40
  testRunner.Given("I have appended the file command.cmd by the line @echo TestEnvVar=%TestEnvVar%", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 61
+#line 41
  testRunner.And("I\'ve defined the TestEnvVar environment variable by the value TestValue", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 62
+#line 42
  testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 63
+#line 43
  testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 64
+#line 44
  testRunner.And(string.Format("I\'ve added the argument -i:{0}", inhetritEnvironment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 65
+#line 45
  testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 66
+#line 46
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 67
+#line 47
  testRunner.Then("the exit code should be -100001", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
-            table3.AddRow(new string[] {
+            table2.AddRow(new string[] {
                         "Error:.*Invalid argument \"i\""});
-#line 68
- testRunner.And("the errors should contain:", ((string)(null)), table3, "And ");
+#line 48
+ testRunner.And("the errors should contain:", ((string)(null)), table2, "And ");
 #line hidden
             this.ScenarioCleanup();
         }

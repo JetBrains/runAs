@@ -250,6 +250,82 @@ this.ScenarioSetup(scenarioInfo);
 #line hidden
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User specifies environment variable via command line")]
+        [NUnit.Framework.TestCaseAttribute("on", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("off", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("auto", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("on", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("off", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("auto", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        public virtual void UserSpecifiesEnvironmentVariableViaCommandLine(string inhetritEnvironment, string value, string output, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User specifies environment variable via command line", exampleTags);
+#line 99
+this.ScenarioSetup(scenarioInfo);
+#line 100
+ testRunner.Given("I have appended the file command.cmd by the line @echo TestEnvVar=\"%TestEnvVar%\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 101
+ testRunner.And(string.Format("I\'ve added the argument \"-e:TestEnvVar={0}\"", value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 102
+ testRunner.And("I\'ve added the argument -u:RunAsTestUser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 103
+ testRunner.And("I\'ve added the argument -p:aaa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 104
+ testRunner.And(string.Format("I\'ve added the argument -i:{0}", inhetritEnvironment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 105
+ testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 106
+ testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 107
+ testRunner.Then("the exit code should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table6.AddRow(new string[] {
+                        string.Format("{0}", output)});
+#line 108
+ testRunner.And("the output should contain:", ((string)(null)), table6, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("User specifies environment variable via command line for current user")]
+        [NUnit.Framework.TestCaseAttribute("on", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("off", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("auto", "TestValue", "TestEnvVar=\"TestValue\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("on", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("off", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        [NUnit.Framework.TestCaseAttribute("auto", "Test Value", "TestEnvVar=\"Test Value\"", new string[0])]
+        public virtual void UserSpecifiesEnvironmentVariableViaCommandLineForCurrentUser(string inhetritEnvironment, string value, string output, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User specifies environment variable via command line for current user", exampleTags);
+#line 121
+this.ScenarioSetup(scenarioInfo);
+#line 122
+ testRunner.Given("I have appended the file command.cmd by the line @echo TestEnvVar=\"%TestEnvVar%\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 123
+ testRunner.And(string.Format("I\'ve added the argument \"-e:TestEnvVar={0}\"", value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 124
+ testRunner.And(string.Format("I\'ve added the argument -i:{0}", inhetritEnvironment), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 125
+ testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 126
+ testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 127
+ testRunner.Then("the exit code should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        ""});
+            table7.AddRow(new string[] {
+                        string.Format("{0}", output)});
+#line 128
+ testRunner.And("the output should contain:", ((string)(null)), table7, "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
