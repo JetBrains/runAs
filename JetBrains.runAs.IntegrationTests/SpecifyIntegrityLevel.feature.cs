@@ -90,7 +90,7 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         string.Format("{0} Mandatory Level", intergiryLevelName)});
 #line 9
- testRunner.And("the output should contain:", ((string)(null)), table1, "And ");
+ testRunner.Then("the output should contain:", ((string)(null)), table1, "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

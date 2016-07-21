@@ -6,7 +6,7 @@ Scenario Outline: User specifies integrity level
 	And I've added the argument WhoAmI.exe
 	And I've added the argument /all
 	When I run RunAs tool	
-	And the output should contain:
+	Then the output should contain:
 	|                                                  |
 	| <intergiryLevelName> Mandatory Level |
 
