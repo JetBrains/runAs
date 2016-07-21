@@ -5,8 +5,7 @@ Scenario Outline: User specifies integrity level
 	And I've added the argument -il:<intergiryLevel>
 	And I've added the argument WhoAmI.exe
 	And I've added the argument /all
-	When I run RunAs tool
-	Then the exit code should be 0
+	When I run RunAs tool	
 	And the output should contain:
 	|                                                  |
 	| <intergiryLevelName> Mandatory Level |

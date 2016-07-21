@@ -84,14 +84,12 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.And("I\'ve added the argument /all", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 8
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 9
- testRunner.Then("the exit code should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table1.AddRow(new string[] {
                         string.Format("{0} Mandatory Level", intergiryLevelName)});
-#line 10
+#line 9
  testRunner.And("the output should contain:", ((string)(null)), table1, "And ");
 #line hidden
             this.ScenarioCleanup();
