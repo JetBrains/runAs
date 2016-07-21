@@ -88,7 +88,7 @@ Result<ExitCode> ProcessWithLogon::Run(const Settings& settings, ProcessTracker&
 		environment = Environment::Override(callingProcessEnvironment, targetUserEnvironment, trace);
 	}
 
-	environment = Environment::Apply(environment, Environment::CreateFormList(settings.GetEnvironmentVariables(), trace), trace);	
+	environment = Environment::Apply(environment, Environment::CreateFormList(settings.GetEnvironmentVariables(), L"from command line", trace), trace);
 	return RunInternal(trace, settings, processTracker, environment);
 }
 

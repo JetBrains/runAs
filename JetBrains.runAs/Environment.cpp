@@ -59,10 +59,10 @@ Result<Environment> Environment::CreateForUser(const Handle& token, bool inherit
 Environment Environment::CreateFormString(const wstring& variables, Trace& trace)
 {
 	trace < L"Environment::CreateFormString";
-	return CreateFormList(StringUtilities::Split(variables, L"\n"), trace);
+	return CreateFormList(StringUtilities::Split(variables, L"\n"), L"from strings", trace);
 }
 
-Environment Environment::CreateFormList(const list<wstring>& variables, Trace& trace)
+Environment Environment::CreateFormList(const list<wstring>& variables, const wstring& source, Trace& trace)
 {
 	trace < L"Environment::CreateFormList";
 	Environment environment;
@@ -78,7 +78,7 @@ Environment Environment::CreateFormList(const list<wstring>& variables, Trace& t
 		auto envValue = matchResult._At(2).str();
 		environment._vars[envName] = envValue;
 		environment._empty = false;
-		TraceVarible(trace, envName, envValue);
+		TraceVarible(trace, envName, envValue, source + L": \"" + *varsIterrator + L"\"");
 	}
 
 	return environment;
@@ -91,9 +91,17 @@ Environment Environment::Override(const Environment& baseEnvironment, const Envi
 	Environment overridedEnvironment;
 	for (auto varsIterator = baseEnvironment._vars.begin(); varsIterator != baseEnvironment._vars.end(); ++varsIterator)
 	{
+		auto overridedValue = overridedEnvironment._vars[varsIterator->first];
 		overridedEnvironment._vars[varsIterator->first] = varsIterator->second;
 		overridedEnvironment._empty = false;
-		TraceVarible(trace, varsIterator->first, varsIterator->second);		
+		if (overridedValue != L"")
+		{
+			TraceVarible(trace, varsIterator->first, varsIterator->second, L"change value: \"" + overridedValue + L"\"");
+		}
+		else
+		{
+			TraceVarible(trace, varsIterator->first, varsIterator->second, L"set value");
+		}
 	}
 
 	auto userProfile = overridedEnvironment._vars[UserProfileEnvVarName];
@@ -108,17 +116,22 @@ Environment Environment::Override(const Environment& baseEnvironment, const Envi
 		// Concat paths
 		if (StringUtilities::Convert(name, toupper) == PathEnvVarName)
 		{
-			value = value + (overridedValue.length() > 0 && value.length() > 0 ? L";" : L"") + overridedValue;
-			overridedEnvironment._vars[name] = value;
-			TraceVarible(trace, name, value);
+			auto newPtah = value + (overridedValue.length() > 0 && value.length() > 0 ? L";" : L"") + overridedValue;
+			overridedEnvironment._vars[name] = newPtah;
+			overridedEnvironment._empty = false;
+			TraceVarible(trace, name, value, L"concat paths");
+			(trace < L"source path: ") << value;
+			(trace < L"additional path: ") << overridedValue;
 			continue;
 		}
 		
 		// Override values when AutoOverrides all value containts a path to userProfile
 		if (AutoOverrides.find(name) != AutoOverrides.end() || overridedValue.find(userProfile) != wstring::npos)
 		{
+			auto prevValue = overridedEnvironment._vars[name];
 			overridedEnvironment._vars[name] = value;
-			TraceVarible(trace, name, value);
+			overridedEnvironment._empty = false;
+			TraceVarible(trace, name, value, L"auto override:\"" + prevValue + L"\"");
 		}
 	}
 
@@ -140,7 +153,7 @@ Environment Environment::Apply(const Environment& baseEnvironment, const Environ
 	{
 		newEnvironment._vars[varsIterator->first] = varsIterator->second;
 		newEnvironment._empty = false;
-		TraceVarible(trace, varsIterator->first, varsIterator->second);
+		TraceVarible(trace, varsIterator->first, varsIterator->second, L"apply");
 	}
 
 	return newEnvironment;
@@ -181,7 +194,7 @@ void Environment::CreateVariableMap(LPVOID environment, Trace& trace)
 		auto envName = matchResult._At(1).str();
 		auto envValue = matchResult._At(2).str();
 		_vars[envName] = envValue;
-		TraceVarible(trace, envName, envValue);
+		TraceVarible(trace, envName, envValue, L"from API results");
 		_empty = false;
 	} while (len > 0);	
 }
@@ -231,7 +244,7 @@ LPVOID* Environment::CreateEnvironment()
 	return environment;
 }
 
-void Environment::TraceVarible(Trace& trace, const wstring& key, const wstring& value)
+void Environment::TraceVarible(Trace& trace, const wstring& key, const wstring& value, const wstring& description)
 {
-	(trace < L"SET \"") << key << L"=" << value << L"\"";
+	(trace < L"SET \"") << key << L"=" << value << L"\"" << L" (" << description << L")";
 }

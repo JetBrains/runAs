@@ -195,7 +195,8 @@ Result<Environment> ProcessAsUser::GetEnvironmentWithSpecifiedByCaller(const Set
 	return Environment::Apply(
 		environment, 
 		Environment::CreateFormList(
-			settings.GetEnvironmentVariables(), 
+			settings.GetEnvironmentVariables(),
+			L"from command line",
 			trace), 
 		trace);
 }

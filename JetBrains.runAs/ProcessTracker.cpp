@@ -40,6 +40,7 @@ Result<bool> ProcessTracker::InitializeConsoleRedirection(SECURITY_ATTRIBUTES& s
 Result<ExitCode> ProcessTracker::WaiteForExit(HANDLE processHandle, Trace& trace)
 {
 	trace < L"ProcessTracker::WaiteForExit";
+	trace < L"Output:" < L"";	
 
 	DWORD exitCode;
 	bool hasData;
