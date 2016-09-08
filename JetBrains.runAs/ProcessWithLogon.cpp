@@ -73,7 +73,7 @@ Result<ExitCode> ProcessWithLogon::Run(const Settings& settings, ProcessTracker&
 		StringWriter getEnvVarsWriter(getEnvVarsStream);
 		StubWriter nullWriter;
 		ProcessTracker getEnvVarsProcessTracker(getEnvVarsWriter, nullWriter);
-		auto getEnvVarsResult = RunInternal(trace, getEnvVarsProcessSettings, getEnvVarsProcessTracker, targetUserEnvironment);
+		auto getEnvVarsResult = RunInternal(trace, getEnvVarsProcessSettings, getEnvVarsProcessTracker, targetUserEnvironment, false);
 		if (getEnvVarsResult.HasError() || getEnvVarsResult.GetResultValue() != 0)
 		{
 			return getEnvVarsResult;
@@ -89,10 +89,10 @@ Result<ExitCode> ProcessWithLogon::Run(const Settings& settings, ProcessTracker&
 	}
 
 	environment = Environment::Apply(environment, Environment::CreateFormList(settings.GetEnvironmentVariables(), L"from command line", trace), trace);
-	return RunInternal(trace, settings, processTracker, environment);
+	return RunInternal(trace, settings, processTracker, environment, _changeIntegrityLevel);
 }
 
-Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& settings, ProcessTracker& processTracker, Environment& environment) const
+Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& settings, ProcessTracker& processTracker, Environment& environment, bool changeIntegrityLevel) const
 {
 	SECURITY_ATTRIBUTES securityAttributes = {};
 	securityAttributes.nLength = sizeof(SECURITY_DESCRIPTOR);
@@ -112,7 +112,7 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 	StringBuffer workingDirectory(settings.GetWorkingDirectory());
 	StringBuffer commandLine(settings.GetCommandLine());
 
-	if (_changeIntegrityLevel)
+	if (changeIntegrityLevel)
 	{
 		trace < L"::LogonUser";
 		auto newUserSecurityTokenHandle = Handle(L"New user security token");
