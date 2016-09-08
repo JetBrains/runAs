@@ -12,11 +12,6 @@
 class Trace;
 class ProcessTracker;
 
-ProcessAsUser::ProcessAsUser(const bool elevated)
-	:_elevated(elevated)
-{
-}
-
 Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& processTracker) const
 {
 	Trace trace(settings.GetLogLevel());
@@ -33,7 +28,7 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 		userName.GetPointer(),
 		domain.GetPointer(),
 		password.GetPointer(),
-		_elevated ? LOGON32_LOGON_NETWORK : LOGON32_LOGON_INTERACTIVE,
+		LOGON32_LOGON_INTERACTIVE,
 		LOGON32_PROVIDER_DEFAULT,
 		&newUserSecurityTokenHandle))
 	{

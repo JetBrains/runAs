@@ -47,17 +47,8 @@ const Result<queue<const IProcess*>> ProcessesSelector::SelectProcesses(const Se
 		// Has Administrative Privileges
 		if (statistic.HasAdministrativePrivileges() && statistic.HasSeAssignPrimaryTokenPrivilege())
 		{
-			if (elevationIsRequired)
-			{
-				// Should be elevated admin, if arg "-il" is "auto" or "high" or "system"
-				trace < L"ProcessesSelector::SelectProcesses push ProcessAsUser Elevated";
-				processes.push(&_processAsUserElevated);
-			}
-			else
-			{
-				trace < L"ProcessesSelector::SelectProcesses push ProcessAsUser";
-				processes.push(&_processAsUser);
-			}					
+			trace < L"ProcessesSelector::SelectProcesses push ProcessAsUser";
+			processes.push(&_processAsUser);
 		}
 	}
 	else

@@ -7,8 +7,7 @@
 
 class ProcessesSelector
 {
-	const ProcessAsUser _processAsUserElevated = ProcessAsUser(true);
-	const ProcessAsUser _processAsUser = ProcessAsUser(false);
+	const ProcessAsUser _processAsUser = ProcessAsUser();
 	const ProcessWithLogon _processWithLogonToChangeIntegrityLevel = ProcessWithLogon(true);
 	const ProcessWithLogon _processWithLogon = ProcessWithLogon(false);
 	const NewProcess _newProcess = NewProcess();
