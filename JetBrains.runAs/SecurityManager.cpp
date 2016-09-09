@@ -46,15 +46,34 @@ const list<wstring> AllPrivilegies = {
 	SE_CREATE_SYMBOLIC_LINK_NAME
 };
 
-void SecurityManager::TrySetAllPrivileges(const Handle& token, const bool enablePrivileges)
+Result<bool> SecurityManager::TrySetAllPrivileges(Trace& trace, const bool enablePrivileges) const
 {
-	for (auto privilegiesIterrator = AllPrivilegies.begin(); privilegiesIterrator != AllPrivilegies.end(); ++privilegiesIterrator)
+	Handle processToken(L"Process token");
+	if (!::OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &processToken))
 	{
-		SetPrivileges(token, { *privilegiesIterrator }, true);
+		return Error(L"OpenProcessToken");
 	}
+
+	return SetPrivileges(trace, processToken, AllPrivilegies, true);
 }
 
-Result<bool> SecurityManager::SetPrivileges(const Handle& token, const list<wstring>& privileges, const bool enablePrivileges)
+Result<bool> SecurityManager::TrySetAllPrivileges(Trace& trace, const Handle& token, const bool enablePrivileges) const
+{
+	return SetPrivileges(trace, token, AllPrivilegies, true);
+}
+
+Result<bool> SecurityManager::SetPrivileges(Trace& trace, const list<wstring>& privileges, const bool enablePrivileges) const
+{
+	Handle processToken(L"Process token");
+	if (!::OpenProcessToken(GetCurrentProcess(), TOKEN_ALL_ACCESS, &processToken))
+	{
+		return Error(L"OpenProcessToken");
+	}
+
+	return SetPrivileges(trace, processToken, privileges, enablePrivileges);
+}
+
+Result<bool> SecurityManager::SetPrivileges(Trace& trace, const Handle& token, const list<wstring>& privileges, const bool enablePrivileges) const
 {
 	auto tokenPrivileges = static_cast<PTOKEN_PRIVILEGES>(_alloca(sizeof(TOKEN_PRIVILEGES) + sizeof(LUID_AND_ATTRIBUTES) * (privileges.size() - 1)));
 	tokenPrivileges->PrivilegeCount = static_cast<DWORD>(privileges.size());	
@@ -64,8 +83,13 @@ Result<bool> SecurityManager::SetPrivileges(const Handle& token, const list<wstr
 		auto privilegeId = LookupPrivilegeValue(*privilegesIterrator);
 		if (privilegeId.HasError())
 		{
-			return Result<bool>(privilegeId.GetError());
+			continue;
 		}
+
+		trace < L"SecurityManager::SetPrivilege \"";
+		trace << *privilegesIterrator;
+		trace << L"\"=";
+		trace << enablePrivileges;
 
 		tokenPrivileges->Privileges[index].Luid = privilegeId.GetResultValue();
 		tokenPrivileges->Privileges[index].Attributes = enablePrivileges ? SE_PRIVILEGE_ENABLED : 0;
@@ -228,11 +252,11 @@ Result<bool> SecurityManager::IsRunAsAdministrator() const
 	return isRunAsAdmin == TRUE;
 }
 
-Result<bool> SecurityManager::SetIntegrityLevel(const IntegrityLevel& integrityLevelId, const Handle& securityToken, Trace& trace)
+Result<bool> SecurityManager::SetIntegrityLevel(const IntegrityLevel& integrityLevelId, const Handle& securityToken, Trace& trace) const
 {
 	if (integrityLevelId != INTEGRITY_LEVEL_AUTO)
 	{
-		trace < L"ProcessAsUser::Set integrity level to \"";
+		trace < L"SecurityManager::Set integrity level to \"";
 		trace << integrityLevelId;
 		trace << L"\"";
 

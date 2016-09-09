@@ -114,6 +114,8 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 
 	if (changeIntegrityLevel)
 	{
+		SecurityManager securityManager;
+
 		trace < L"::LogonUser";
 		auto newUserSecurityTokenHandle = Handle(L"New user security token");
 		if (!LogonUser(
@@ -136,7 +138,7 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 			return Error(L"LoadUserProfile");
 		}
 
-		auto setIntegrityLevelResult = SecurityManager::SetIntegrityLevel(settings.GetIntegrityLevel(), newUserSecurityTokenHandle, trace);
+		auto setIntegrityLevelResult = securityManager.SetIntegrityLevel(settings.GetIntegrityLevel(), newUserSecurityTokenHandle, trace);
 		if (setIntegrityLevelResult.HasError())
 		{
 			return Result<ExitCode>(setIntegrityLevelResult.GetError());

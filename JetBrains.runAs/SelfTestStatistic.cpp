@@ -2,7 +2,7 @@
 #include "SelfTestStatistic.h"
 
 SelfTestStatistic::SelfTestStatistic()
-	:SelfTestStatistic(false, false, false, INTEGRITY_LEVEL_AUTO)
+	:SelfTestStatistic(false, false, false, false, INTEGRITY_LEVEL_AUTO)
 {
 }
 
@@ -10,8 +10,9 @@ SelfTestStatistic::SelfTestStatistic(
 	const bool hasLogonSID, 
 	const bool hasAdministrativePrivileges, 
 	const bool hasSeAssignPrimaryTokenPrivilege,
+	const bool hasSeTcbPrivilege,
 	const IntegrityLevel integrityLevel)
-	: _isService(hasLogonSID), _hasAdministrativePrivileges(hasAdministrativePrivileges), _hasSeAssignPrimaryTokenPrivilege(hasSeAssignPrimaryTokenPrivilege), _integrityLevel(integrityLevel)
+	: _isService(hasLogonSID), _hasAdministrativePrivileges(hasAdministrativePrivileges), _hasSeAssignPrimaryTokenPrivilege(hasSeAssignPrimaryTokenPrivilege), _hasSeTcbPrivilege(hasSeTcbPrivilege), _integrityLevel(integrityLevel)
 {
 }
 
@@ -28,6 +29,11 @@ bool SelfTestStatistic::HasAdministrativePrivileges() const
 bool SelfTestStatistic::HasSeAssignPrimaryTokenPrivilege() const
 {
 	return _hasSeAssignPrimaryTokenPrivilege;
+}
+
+bool SelfTestStatistic::HasSeTcbPrivilegePrivilege() const
+{
+	return _hasSeTcbPrivilege;
 }
 
 IntegrityLevel SelfTestStatistic::GetIntegrityLevel() const

@@ -26,7 +26,7 @@ Result<ExitCode> NewProcess::Run(const Settings& settings, ProcessTracker& proce
 
 	if (settings.GetIntegrityLevel() != INTEGRITY_LEVEL_AUTO || settings.GetIntegrityLevel() != currentIntegrityLevelResult.GetResultValue())
 	{
-		auto setIntegrityLevelResult = SecurityManager::SetIntegrityLevel(settings.GetIntegrityLevel(), processToken, trace);
+		auto setIntegrityLevelResult = securityManager.SetIntegrityLevel(settings.GetIntegrityLevel(), processToken, trace);
 		if (setIntegrityLevelResult.HasError())
 		{
 			return Result<ExitCode>(setIntegrityLevelResult.GetError());

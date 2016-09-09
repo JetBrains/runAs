@@ -43,9 +43,10 @@ const Result<queue<const IProcess*>> ProcessesSelector::SelectProcesses(const Se
 		trace << elevationIsRequired;
 
 		// For Local System services (INTEGRITY_LEVEL_SYSTEM) and services under admin (INTEGRITY_LEVEL_HIGH)
-		// Has SeAssignPrimaryToken Privilege		
+		// Has SeAssignPrimaryTokenPrivilege (Replace a process-level token)
+		// Has SeTcbPrivilegePrivilege (Act as part of the operating system)
 		// Has Administrative Privileges
-		if (statistic.HasAdministrativePrivileges() && statistic.HasSeAssignPrimaryTokenPrivilege())
+		if (statistic.HasAdministrativePrivileges() && statistic.HasSeAssignPrimaryTokenPrivilege() && statistic.HasSeTcbPrivilegePrivilege())
 		{
 			trace < L"ProcessesSelector::SelectProcesses push ProcessAsUser";
 			processes.push(&_processAsUser);

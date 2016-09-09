@@ -22,6 +22,13 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 	StringBuffer workingDirectory(settings.GetWorkingDirectory());
 	StringBuffer commandLine(settings.GetCommandLine());
 
+	SecurityManager securityManager;
+	auto setAllPrivilegesResult = securityManager.SetPrivileges(trace, { SE_TCB_NAME, SE_ASSIGNPRIMARYTOKEN_NAME }, true);
+	if(setAllPrivilegesResult.HasError())
+	{
+		return setAllPrivilegesResult.GetError();
+	}
+
 	trace < L"::LogonUser";
 	auto newUserSecurityTokenHandle = Handle(L"New user security token");
 	if (!LogonUser(
@@ -102,7 +109,7 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 		return Result<ExitCode>(newProcessEnvironmentResult.GetError());
 	}
 
-	auto setIntegrityLevelResult = SecurityManager::SetIntegrityLevel(settings.GetIntegrityLevel(), primaryNewUserSecurityTokenHandle, trace);
+	auto setIntegrityLevelResult = securityManager.SetIntegrityLevel(settings.GetIntegrityLevel(), primaryNewUserSecurityTokenHandle, trace);
 	if (setIntegrityLevelResult.HasError())
 	{
 		return Result<ExitCode>(setIntegrityLevelResult.GetError());

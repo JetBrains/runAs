@@ -21,7 +21,7 @@ Result<ExitCode> SelfTest::Run(const Settings& settings) const
 		return statisticResult.GetError();
 	}
 
-	auto statistic = statisticResult.GetResultValue();		
+	auto statistic = statisticResult.GetResultValue();
 	if (statistic.IsService())
 	{	
 		if (!statistic.HasAdministrativePrivileges())
@@ -32,6 +32,11 @@ Result<ExitCode> SelfTest::Run(const Settings& settings) const
 		if (!statistic.HasSeAssignPrimaryTokenPrivilege())
 		{
 			return EXIT_CODE_NO_ASSIGN_PRIMARY_TOKEN_PRIV;
+		}
+
+		if (!statistic.HasSeTcbPrivilegePrivilege())
+		{
+			return EXIT_CODE_NO_TCB_PRIV;
 		}
 	}
 	
@@ -87,6 +92,15 @@ Result<SelfTestStatistic> SelfTest::GetStatistic(const Settings& settings) const
 	trace < L"SelfTest::HasPrivilege(SE_ASSIGNPRIMARYTOKEN_NAME): ";
 	trace << hasSeAssignPrimaryTokenPrivilegeResult.GetResultValue();
 
+	auto hasSeTcbPrivilegeResult = HasPrivilege(trace, processToken, SE_TCB_NAME);
+	if (hasSeTcbPrivilegeResult.HasError())
+	{
+		return hasSeTcbPrivilegeResult.GetError();
+	}
+
+	trace < L"SelfTest::HasPrivilege(SE_TCB_NAME): ";
+	trace << hasSeTcbPrivilegeResult.GetResultValue();
+
 	auto integrityLevelResult = GetIntegrityLevel(trace, processToken);
 	if (integrityLevelResult.HasError())
 	{
@@ -101,6 +115,7 @@ Result<SelfTestStatistic> SelfTest::GetStatistic(const Settings& settings) const
 		isServiceResult.GetResultValue(),
 		hasAdministrativePrivilegesResult.GetResultValue(),
 		hasSeAssignPrimaryTokenPrivilegeResult.GetResultValue(),
+		hasSeTcbPrivilegeResult.GetResultValue(),
 		integrityLevelResult.GetResultValue());
 }
 
