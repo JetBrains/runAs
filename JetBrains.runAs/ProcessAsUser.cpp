@@ -12,6 +12,12 @@
 class Trace;
 class ProcessTracker;
 
+DWORD allLogonTypes[] = {
+	LOGON32_LOGON_BATCH,
+	LOGON32_LOGON_SERVICE,
+	LOGON32_LOGON_INTERACTIVE
+};
+
 Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& processTracker) const
 {
 	Trace trace(settings.GetLogLevel());
@@ -29,19 +35,52 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 		return setAllPrivilegesResult.GetError();
 	}
 
-	trace < L"::LogonUser";
 	auto newUserSecurityTokenHandle = Handle(L"New user security token");
-	if (!LogonUser(
-		userName.GetPointer(),
-		domain.GetPointer(),
-		password.GetPointer(),
-		LOGON32_LOGON_INTERACTIVE,
-		LOGON32_PROVIDER_DEFAULT,
-		&newUserSecurityTokenHandle))
+	auto logonTypeCount = sizeof(allLogonTypes) / sizeof(allLogonTypes[0]);
+	for (auto logonTypeIndex = 0; logonTypeIndex < logonTypeCount; logonTypeIndex++)
 	{
-		return Error(L"LogonUser");
-	}	
-	
+		auto logonType = allLogonTypes[logonTypeIndex];
+		trace < L"::LogonUser using logon type ";
+		switch (logonType)
+		{
+			case LOGON32_LOGON_INTERACTIVE:
+				trace << L"LOGON32_LOGON_INTERACTIVE";
+				break;
+
+			case LOGON32_LOGON_NETWORK:
+				trace << L"LOGON32_LOGON_NETWORK";
+				break;
+
+			case LOGON32_LOGON_BATCH:
+				trace << L"LOGON32_LOGON_BATCH";
+				break;
+
+			case LOGON32_LOGON_SERVICE:
+				trace << L"LOGON32_LOGON_SERVICE";
+				break;
+		}
+
+		if (LogonUser(
+			userName.GetPointer(),
+			domain.GetPointer(),
+			password.GetPointer(),
+			logonType,
+			LOGON32_PROVIDER_DEFAULT,
+			&newUserSecurityTokenHandle))
+		{
+			break;
+		}
+		
+		auto error = Error(L"LogonUser");
+		trace << L" - ";
+		trace << error.GetDescription();
+
+		if(logonTypeIndex == logonTypeCount -1)
+		{
+			return error;
+		}
+	}
+
 	trace < L"ProcessAsUser::InitializeConsoleRedirection a new security descriptor";
 	trace < L"::InitializeSecurityDescriptor";
 	SECURITY_DESCRIPTOR securityDescriptor = {};

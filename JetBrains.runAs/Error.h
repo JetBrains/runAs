@@ -12,7 +12,7 @@ class Error
 	static ErrorCode GetErrorCodeInternal();
 	static wstring GetLastErrorMessageInternal(const wstring& targetAction);	
 
-public:		
+public:
 	Error();
 	explicit Error(const wstring& targetAction);
 	Error(const wstring& targetAction, const wstring& arg);
@@ -23,4 +23,3 @@ public:
 	ErrorCode GetCode() const;
 	wstring GetDescription() const;	
 };
-
