@@ -36,8 +36,8 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 	}
 
 	auto newUserSecurityTokenHandle = Handle(L"New user security token");
-	auto logonTypeCount = sizeof(allLogonTypes) / sizeof(allLogonTypes[0]);
-	for (auto logonTypeIndex = 0; logonTypeIndex < logonTypeCount; logonTypeIndex++)
+	unsigned long logonTypeCount = sizeof(allLogonTypes) / sizeof(allLogonTypes[0]);
+	for (unsigned long logonTypeIndex = 0; logonTypeIndex < logonTypeCount; logonTypeIndex++)
 	{
 		auto logonType = allLogonTypes[logonTypeIndex];
 		trace < L"::LogonUser using logon type ";
