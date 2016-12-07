@@ -4,7 +4,7 @@ The runAs tool provides an ability to run the Windows process under the specifie
 
 Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
 
-## Ccommand line arguments
+## Command line arguments
 
 | Argument | Description | Optional | Default value|
 | ------------- |:-------------:|:-------------:|:-------------:|
@@ -25,7 +25,7 @@ For example:
 
 `JetBrains.runAs.exe -p:MyPassword -u:SomeDomain\SomeUserName WhoAmI.exe /ALL`
 
-Or another one example that doing the same thing:
+Or another example that does the same thing:
 
 `JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt`
 
@@ -38,20 +38,20 @@ WhoAmI.exe
 
 ## Some comments
 
-Each account has a set of privileges is like a set of abilities.
-Windows integrity level is like a filter of abilities.
+Each account has a set of privileges, like a set of abilities.
+The Windows integrity level is like a filter for abilities.
 
-So your account could have administrative privileges, but _low_ integrity level. In this case the most of privileges will be filtered. For example: administrator in the Chrome browser.
+So your account may have administrative privileges, but a _low_ integrity level. In this case most of the privileges will be filtered. For example: administrator in the Chrome browser.
 
-Another your account could have standard user privileges, but _high_ integrity level. In this case the most of privileges will not be filtered. For example: some Windows service working under the standard user account.
+Your other account may have standard user privileges, but a _high_ integrity level. In this case most of the privileges will not be filtered. For example: some Windows service working under the standard user account.
 
 Windows API provides 2 ways to do _"runAs"_:
 _CreateProcessAsUser_ (1) and _CreateProcessWithLogonW_ (2)
 
-* (1) does it directly. The integrity level can be **_"High"_** (if primary security access token is used).
-* (2) does it via dedicated logon service. The integrity level can be less or equal **_"Medium"_** in common cases. But this service can make it higher via the "Admin elevation" dialog, but it is not our case.
+* (1) does it directly. The integrity level can be **_"High"_** (if the primary security access token is used).
+* (2) does it via a dedicated logon service. The integrity level can be less or equal to **_"Medium"_** in common cases. But this service can make it higher via the "Admin elevation" dialog, but it is not our case.
 
-To use (1) caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token by a primary (not filtered) security access token with the full set of privileges ("High" integrity leve). See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
+To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
 
-To use (2) caller **should have a logon SID**. See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx).
+To use (2), the caller **should have a logon SID**. See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx).
 You cannot call _CreateProcessWithLogonW_ from a process that is running under the _"LocalSystem"_ account, because the function uses the logon SID in the caller token, and the token for the _"LocalSystem"_ account does not contain this SID. As an alternative, use the (1) or use other accounts.
