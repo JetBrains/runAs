@@ -14,7 +14,7 @@ Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
 | -b: | base number for exit code | X | -100000 |
 | -e: | set an environment variable in the format "name=value" | X | |
 | -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
-| -il: | [integrity level](https://msdn.microsoft.com/en-us/library/bb625963.aspx)(*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
+| -il: | [integrity level] (https://msdn.microsoft.com/en-us/library/bb625963.aspx)(*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
 | -s: | show mode for the created process *hide* or *normal* or *show* | X | *hide* |
 | -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
 | -c: | text file, containing any configuration arguments | | |
