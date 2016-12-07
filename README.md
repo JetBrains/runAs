@@ -1,6 +1,6 @@
 # runAs
 
-The (runAs tool)[https://github.com/JetBrains/runAs] provides an ability to run the Windows process under the specified Windows user's account.
+The runAs tool provides an ability to run the Windows process under the specified Windows user's account.
 
 Download it from [NuGet](https://www.nuget.org/packages/JetBrains.runAs/).
 
