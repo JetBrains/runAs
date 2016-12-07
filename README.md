@@ -51,7 +51,7 @@ _CreateProcessAsUser_ (1) and _CreateProcessWithLogonW_ (2)
 * (1) does it directly. The integrity level can be **_"High"_** (if the primary security access token is used).
 * (2) does it via a dedicated logon service. The integrity level can be less or equal to **_"Medium"_** in common cases. But this service can make it higher via the "Admin elevation" dialog, but it is not our case.
 
-To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
+To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **should have _SE_TCB_NAME_** privilege to act as part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
 
 To use (2), the caller **should have a logon SID**. See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx).
 You cannot call _CreateProcessWithLogonW_ from a process that is running under the _"LocalSystem"_ account, because the function uses the logon SID in the caller token, and the token for the _"LocalSystem"_ account does not contain this SID. As an alternative, use the (1) or use other accounts.
