@@ -41,9 +41,9 @@ WhoAmI.exe
 
 The _runAs_ tool uses one of two ways to create process which are provided by Windows API:
 
-1. Windows API call _CreateProcessAsUser_ creates process as specified user directly and the integrity level can be elevated.
+1. The Windows API call _CreateProcessAsUser_ to create process as a specified user directly and the integrity level can be elevated.
 
-2. Windows API call _CreateProcessWithLogonW_ creates process as specified user via a dedicated logon service and the integrity level can not be elevated.
+2. The Windows API call _CreateProcessWithLogonW_ to create process as a specified user via a dedicated logon service and the integrity level can not be elevated.
 
 To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **should have _SE_TCB_NAME_** privilege to act as part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx). The _runAs_ tool uses it when works under Windows service.
 
