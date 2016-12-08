@@ -36,3 +36,5 @@ ipch/
 JetBrains.runAs.IntegrationTests/obj/
 *.opendb
 *.db
+/JetBrains.runAs/JetBrains.runAs.vcxproj.user
+/.vs/runAs/v14/.suo

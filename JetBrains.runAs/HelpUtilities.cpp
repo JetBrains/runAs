@@ -62,7 +62,7 @@ wstring HelpUtilities::GetHelp()
 	
 	help << endl << L"\t-t" << "\t\t\t- self-testing. Returns exit codes:";
 	help << endl << L"\t\t32\t\t\tready to work in the 32-bit mode";
-	help << endl << L"\t\t64\t\t\tready to work in the 64-bit mode-";	
+	help << endl << L"\t\t64\t\t\tready to work in the 64-bit mode";	
 	help << endl << L"\t\t" << EXIT_CODE_NO_ADMIN << L"\t\t\tinvoker has no administrative privileges when running under the Windows service";	
 	help << endl << L"\t\t" << EXIT_CODE_NO_ASSIGN_PRIMARY_TOKEN_PRIV << L"\t\t\tinvoker has no SeAssignPrimaryTokenPrivilege privilege when running under the Windows service";
 	
