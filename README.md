@@ -1,7 +1,6 @@
 # runAs
 
-The _runAs_ tool provides an ability to run the Windows process under the specified Windows user's account.
-To use with (TeamCity)[https://www.jetbrains.com/teamcity/] see (plugin)[https://github.com/JetBrains/teamcity-runas-plugin]
+The _runAs_ tool provides an ability to run the Windows process under the specified Windows user's account. To use with [TeamCity](https://www.jetbrains.com/teamcity/) see [plugin](https://github.com/JetBrains/teamcity-runas-plugin).
 
 You can download _runAs_ tool from [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/)
 
