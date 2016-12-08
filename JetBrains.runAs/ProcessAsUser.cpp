@@ -29,10 +29,10 @@ Result<ExitCode> ProcessAsUser::Run(const Settings& settings, ProcessTracker& pr
 	StringBuffer commandLine(settings.GetCommandLine());
 
 	SecurityManager securityManager;
-	auto setAllPrivilegesResult = securityManager.SetPrivileges(trace, { SE_TCB_NAME, SE_ASSIGNPRIMARYTOKEN_NAME }, true);
-	if(setAllPrivilegesResult.HasError())
+	auto setPrivilegesResult = securityManager.SetPrivileges(trace, { SE_TCB_NAME, SE_ASSIGNPRIMARYTOKEN_NAME }, true);
+	if(setPrivilegesResult.HasError())
 	{
-		return setAllPrivilegesResult.GetError();
+		return setPrivilegesResult.GetError();
 	}
 
 	auto newUserSecurityTokenHandle = Handle(L"New user security token");

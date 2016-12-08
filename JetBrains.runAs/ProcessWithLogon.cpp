@@ -114,15 +114,13 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 
 	if (changeIntegrityLevel)
 	{
-		SecurityManager securityManager;
-
 		trace < L"::LogonUser";
 		auto newUserSecurityTokenHandle = Handle(L"New user security token");
 		if (!LogonUser(
 			userName.GetPointer(),
 			domain.GetPointer(),
 			password.GetPointer(),
-			LOGON32_LOGON_NETWORK,
+			LOGON32_LOGON_BATCH,
 			LOGON32_PROVIDER_DEFAULT,
 			&newUserSecurityTokenHandle))
 		{
@@ -138,6 +136,7 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 			return Error(L"LoadUserProfile");
 		}
 
+		SecurityManager securityManager;
 		auto setIntegrityLevelResult = securityManager.SetIntegrityLevel(settings.GetIntegrityLevel(), newUserSecurityTokenHandle, trace);
 		if (setIntegrityLevelResult.HasError())
 		{
@@ -147,7 +146,7 @@ Result<ExitCode> ProcessWithLogon::RunInternal(Trace& trace, const Settings& set
 		trace < L"::CreateProcessWithTokenW";		
 		if (!CreateProcessWithTokenW(
 			newUserSecurityTokenHandle,
-			LOGON_NETCREDENTIALS_ONLY,
+			LOGON_WITH_PROFILE,
 			nullptr,
 			commandLine.GetPointer(),
 			CREATE_UNICODE_ENVIRONMENT,
