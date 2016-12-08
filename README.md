@@ -48,8 +48,8 @@ Your other account may have standard user privileges, but a _high_ integrity lev
 Windows API provides 2 ways to do _"runAs"_:
 _CreateProcessAsUser_ (1) and _CreateProcessWithLogonW_ (2)
 
-* (1) does it directly. The integrity level can be **_"High"_** (if the primary security access token is used).
-* (2) does it via a dedicated logon service. The integrity level can be less or equal to **_"Medium"_** in common cases. But this service can make it higher via the "Admin elevation" dialog, but it is not our case.
+* (1) does it directly and the integrity level can be elevated.
+* (2) does it via a dedicated logon service and the integrity level can not be elevated.
 
 To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **should have _SE_TCB_NAME_** privilege to act as part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
 
