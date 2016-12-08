@@ -2,7 +2,7 @@
 
 The runAs tool provides an ability to run the Windows process under the specified Windows user's account.
 
-Download it from [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/).
+Download [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/)
 
 ## Command line arguments
 
