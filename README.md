@@ -41,10 +41,8 @@ WhoAmI.exe
 This tool runs commands under specific Windows account and Windows integrity level. Each account has a set of privileges, like a set of abilities. The Windows integrity level is like a filter for abilities. So your account may have administrative privileges, but a _low_ integrity level. In this case most of the privileges will be filtered. For example: administrator in the _Chrome_ browser. Other account might have standard user privileges, but a _high_ integrity level. In this case the most of these privileges are not filtered. For example: some Windows service working under the standard user account.
 
 Windows API provides 2 ways to do _"runAs"_:
-_CreateProcessAsUser_ (1) and _CreateProcessWithLogonW_ (2)
-
-* (1) Creates process as specified user directly and the integrity level can be elevated.
-* (2) Creates process as specified user via a dedicated logon service and the integrity level can not be elevated.
+1. Windows API call _CreateProcessAsUser_ creates process as specified user directly and the integrity level can be elevated.
+2. Windows API call _CreateProcessWithLogonW_ creates process as specified user via a dedicated logon service and the integrity level can not be elevated.
 
 To use (1), the caller **should have _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **should have _SE_TCB_NAME_** privilege to act as part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx).
 
