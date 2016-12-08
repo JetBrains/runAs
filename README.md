@@ -10,7 +10,7 @@ Download [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="1
 | ------------- |:-------------:|:-------------:|:-------------:|
 | -u:  | *"user"* or *"domain\user"* or *"user@domain"* |||
 | -p:   | user's password | X | empty |
-| -w: | current directory | X | empty |
+| -w: | working directory | X | empty |
 | -b: | base number for exit code | X | -100000 |
 | -e: | set an environment variable in the format "name=value" | X | |
 | -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
