@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<Version Condition=" '$(Version)' == '' ">1.0.33</Version>
+		<Version Condition=" '$(Version)' == '' ">1.0.34</Version>
 	</PropertyGroup>
 
 	<UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
