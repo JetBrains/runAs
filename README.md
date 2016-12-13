@@ -48,4 +48,4 @@ To use (1), the caller **needs _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to repla
 
 To use (2), the caller **needs a logon SID**. See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx). _CreateProcessWithLogonW_ cannot be called from a process that is running under the _"LocalSystem"_ account, because the function uses the logon SID in the caller token, and the token for the _"LocalSystem"_ account does not contain this SID. The _runAs_ tool uses this approach when working in the user session.
 
-![Flowchart](/JetBrains/runAs/blob/master/docs/runAs.jpg)
+![Flowchart](https://github.com/JetBrains/runAs/blob/master/docs/runAs.jpg)
