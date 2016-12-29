@@ -56,6 +56,11 @@ wstring StringUtilities::Join(const list<wstring> strings, const wstring& separa
 
 wstring StringUtilities::Replace(const wstring& strSource, const wstring& replaceFrom, const wstring& replaceTo)
 {
+	if(strSource.size() == 0 || replaceFrom.size() == 0 || replaceTo.size() == 0)
+	{
+		return strSource;
+	}
+
 	size_t posn;
 	auto result = strSource;
 	while (std::wstring::npos != (posn = result.find(replaceFrom)))
