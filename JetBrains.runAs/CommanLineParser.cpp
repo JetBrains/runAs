@@ -208,7 +208,7 @@ Result<Settings> CommanLineParser::TryParse(const list<wstring>& args, ExitCode*
 	list<wstring> emptyArgs;
 	if (executable == L"")
 	{
-		emptyArgs.push_back(ARG_EXECUTABLE);		
+		emptyArgs.push_back(ARG_EXECUTABLE);
 	}
 
 	if (!selfTesting && emptyArgs.size() > 0)

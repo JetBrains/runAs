@@ -8,6 +8,7 @@
 #include "Runner.h"
 #include "Trace.h"
 #include <iomanip>
+#include "StringUtilities.h"
 
 wstring GetStringValue(wstring value)
 {
@@ -80,7 +81,9 @@ int _tmain(int argc, _TCHAR *argv[]) {
 		{
 			for (auto argsIterrator = args.begin(); argsIterrator != args.end(); ++argsIterrator)
 			{
-				console << L" " << *argsIterrator;
+				auto arg = *argsIterrator;
+				arg = StringUtilities::Replace(arg, settings.GetPassword(), L"*****");
+				console << L" " << arg;
 			}
 		}
 
