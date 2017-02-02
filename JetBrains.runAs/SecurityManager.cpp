@@ -78,16 +78,16 @@ Result<bool> SecurityManager::SetPrivileges(Trace& trace, const Handle& token, c
 	auto tokenPrivileges = static_cast<PTOKEN_PRIVILEGES>(_alloca(sizeof(TOKEN_PRIVILEGES) + sizeof(LUID_AND_ATTRIBUTES) * (privileges.size() - 1)));
 	tokenPrivileges->PrivilegeCount = static_cast<DWORD>(privileges.size());	
 	auto index = 0;
-	for (auto privilegesIterrator = privileges.begin(); privilegesIterrator != privileges.end(); ++privilegesIterrator)
+	for (auto privilegesIterator = privileges.begin(); privilegesIterator != privileges.end(); ++privilegesIterator)
 	{		
-		auto privilegeId = LookupPrivilegeValue(*privilegesIterrator);
+		auto privilegeId = LookupPrivilegeValue(*privilegesIterator);
 		if (privilegeId.HasError())
 		{
 			continue;
 		}
 
 		trace < L"SecurityManager::SetPrivilege \"";
-		trace << *privilegesIterrator;
+		trace << *privilegesIterator;
 		trace << L"\"=";
 		trace << enablePrivileges;
 
@@ -362,9 +362,9 @@ Result<bool> SecurityManager::HasGroupSid(Trace& trace, const Handle& token, wst
 	}
 
 	auto tokenGroups = tokenGroupsResult.GetResultValue();
-	for (auto groupsIterrator = tokenGroups.begin(); groupsIterrator != tokenGroups.end(); ++groupsIterrator)
+	for (auto groupsIterator = tokenGroups.begin(); groupsIterator != tokenGroups.end(); ++groupsIterator)
 	{
-		if (groupsIterrator->GetSid() == sid)
+		if (groupsIterator->GetSid() == sid)
 		{
 			return true;
 		}

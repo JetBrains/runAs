@@ -79,9 +79,9 @@ int _tmain(int argc, _TCHAR *argv[]) {
 		}
 		else
 		{
-			for (auto argsIterrator = args.begin(); argsIterrator != args.end(); ++argsIterrator)
+			for (auto argsIterator = args.begin(); argsIterator != args.end(); ++argsIterator)
 			{
-				auto arg = *argsIterrator;
+				auto arg = *argsIterator;
 				arg = StringUtilities::Replace(arg, settings.GetPassword(), L"*****");
 				console << L" " << arg;
 			}

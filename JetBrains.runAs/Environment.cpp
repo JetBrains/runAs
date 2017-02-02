@@ -67,9 +67,9 @@ Environment Environment::CreateFormList(const list<wstring>& variables, const ws
 	trace < L"Environment::CreateFormList";
 	Environment environment;
 	wsmatch matchResult;
-	for (auto varsIterrator = variables.begin(); varsIterrator != variables.end(); ++varsIterrator)
+	for (auto varsIterator = variables.begin(); varsIterator != variables.end(); ++varsIterator)
 	{
-		if (!regex_search(*varsIterrator, matchResult, EnvVarRegex))
+		if (!regex_search(*varsIterator, matchResult, EnvVarRegex))
 		{
 			continue;
 		}
@@ -78,7 +78,7 @@ Environment Environment::CreateFormList(const list<wstring>& variables, const ws
 		auto envValue = matchResult._At(2).str();
 		environment._vars[envName] = envValue;
 		environment._empty = false;
-		TraceVarible(trace, envName, envValue, source + L": \"" + *varsIterrator + L"\"");
+		TraceVarible(trace, envName, envValue, source + L": \"" + *varsIterator + L"\"");
 	}
 
 	return environment;

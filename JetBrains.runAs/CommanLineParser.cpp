@@ -215,9 +215,9 @@ Result<Settings> CommanLineParser::TryParse(const list<wstring>& args, ExitCode*
 	{
 		wstringstream details;
 		details << L"The argument(s):";
-		for (auto emptyArgsIterrator = emptyArgs.begin(); emptyArgsIterrator != emptyArgs.end(); ++emptyArgsIterrator)
+		for (auto emptyArgsIterator = emptyArgs.begin(); emptyArgsIterator != emptyArgs.end(); ++emptyArgsIterator)
 		{
-			details << L" \"" << *emptyArgsIterrator << L"\"";
+			details << L" \"" << *emptyArgsIterator << L"\"";
 		}
 
 		details << L" should not be empty.";
@@ -245,12 +245,12 @@ Result<Settings> CommanLineParser::TryParse(const list<wstring>& args, ExitCode*
 bool CommanLineParser::TryGetValue(const list<wstring>& values, const wstring& str, wstring* value) const
 {	
 	auto strInLowerCase = StringUtilities::Convert(str, tolower);
-	for (auto valueIterrator = values.begin(); valueIterrator != values.end(); ++valueIterrator)
+	for (auto valueIterator = values.begin(); valueIterator != values.end(); ++valueIterator)
 	{
-		auto valueFromListInLowerCase = StringUtilities::Convert(*valueIterrator, tolower);
+		auto valueFromListInLowerCase = StringUtilities::Convert(*valueIterator, tolower);
 		if(strInLowerCase == valueFromListInLowerCase)
 		{
-			*value = *valueIterrator;
+			*value = *valueIterator;
 			return true;
 		}
 	}

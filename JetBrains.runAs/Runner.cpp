@@ -86,5 +86,23 @@ Result<ExitCode> Runner::RunProcessAsUser(const Settings& settings) const
 		return Result<ExitCode>(Error(L"RunProcessAsUser", 0, ERROR_CODE_UNKOWN, L"The processes are not available."));		
 	}
 
-	return results.back();	
+	// If susscess returns a result
+	if(!results.back().HasError())
+	{
+		return results.back();
+	}
+
+	// If has known error returns first one
+	for (auto resultsIterator = results.begin(); resultsIterator != results.end(); ++resultsIterator)
+	{
+		if (resultsIterator->HasError() && resultsIterator->GetError().GetCode() == ERROR_CODE_UNKOWN)
+		{
+			continue;
+		}
+
+		return *resultsIterator;
+	}
+
+	// Returns last result
+	return results.back();
 }

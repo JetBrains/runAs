@@ -37,7 +37,7 @@ wstring StringUtilities::Join(const list<wstring> strings, const wstring& separa
 {
 	wstringstream result;
 	auto first = true;
-	for (auto stringIterrator = strings.begin(); stringIterrator != strings.end(); ++stringIterrator)
+	for (auto stringIterator = strings.begin(); stringIterator != strings.end(); ++stringIterator)
 	{
 		if (first)
 		{
@@ -48,7 +48,7 @@ wstring StringUtilities::Join(const list<wstring> strings, const wstring& separa
 			result << separator;
 		}
 		
-		result << *stringIterrator;		
+		result << *stringIterator;		
 	}
 
 	return result.str();

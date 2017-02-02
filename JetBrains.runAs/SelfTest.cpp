@@ -59,9 +59,9 @@ Result<SelfTestStatistic> SelfTest::GetStatistic(const Settings& settings) const
 	if (!tokenGroupsResult.HasError())
 	{
 		auto tokenGroups = tokenGroupsResult.GetResultValue();
-		for (auto groupsIterrator = tokenGroups.begin(); groupsIterrator != tokenGroups.end(); ++groupsIterrator)
+		for (auto groupsIterator = tokenGroups.begin(); groupsIterator != tokenGroups.end(); ++groupsIterator)
 		{
-			trace < groupsIterrator->ToString();
+			trace < groupsIterator->ToString();
 		}
 	}	
 	

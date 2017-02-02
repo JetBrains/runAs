@@ -61,14 +61,14 @@ wstring Settings::GetExecutable() const
 wstring Settings::GetCommandLineArgs() const
 {
 	wstringstream commandLine;
-	for (auto argsIterrator = _args.begin(); argsIterrator != _args.end(); ++argsIterrator)
+	for (auto argsIterator = _args.begin(); argsIterator != _args.end(); ++argsIterator)
 	{
-		if (argsIterrator != _args.begin())
+		if (argsIterator != _args.begin())
 		{
 			commandLine << L" ";
 		}
 
-		commandLine << AddQuotes(*argsIterrator);
+		commandLine << AddQuotes(*argsIterator);
 	}
 	
 	return commandLine.str();
@@ -140,9 +140,9 @@ wstring Settings::ToString() const
 	text << L"\t" << ARG_USER_NAME << L":\t\t" << GetUserName();
 	text << endl << L"\t" << ARG_DOMAIN << L":\t\t\t" << GetDomain();
 	text << endl << L"\t" << ARG_WORKING_DIRECTORY << L":\t" << GetWorkingDirectory();
-	for (auto envVarsIterrator = _envVars.begin(); envVarsIterrator != _envVars.end(); ++envVarsIterrator)
+	for (auto envVarsIterator = _envVars.begin(); envVarsIterator != _envVars.end(); ++envVarsIterator)
 	{
-		text << endl << L"\t" << ARG_ENV_VAR << L":\t\t" << *envVarsIterrator;
+		text << endl << L"\t" << ARG_ENV_VAR << L":\t\t" << *envVarsIterator;
 	}
 	
 	text << endl << L"\t" << ARG_EXIT_CODE_BASE << L":\t\t" << GetExitCodeBase();
