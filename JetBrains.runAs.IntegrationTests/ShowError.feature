@@ -15,7 +15,6 @@ Scenario Outline: User sees header and full error info when unknown user and in 
 	And the errors should contain:
 	|                                                |
 	| Error: The user name or password is incorrect. |
-	| CreateProcessWithLogonW returns                |
 Examples:
 	| logLevel |
 	| normal   |

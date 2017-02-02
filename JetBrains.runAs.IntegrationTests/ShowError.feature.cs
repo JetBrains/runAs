@@ -102,8 +102,6 @@ this.ScenarioSetup(scenarioInfo);
                         ""});
             table2.AddRow(new string[] {
                         "Error: The user name or password is incorrect."});
-            table2.AddRow(new string[] {
-                        "CreateProcessWithLogonW returns"});
 #line 15
  testRunner.And("the errors should contain:", ((string)(null)), table2, "And ");
 #line hidden
@@ -118,21 +116,21 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User does not see header and sees brief error info when unknown user and in the e" +
                     "rrors log mode", exampleTags);
-#line 25
+#line 24
 this.ScenarioSetup(scenarioInfo);
-#line 26
+#line 25
  testRunner.Given("I have appended the file command.cmd by the line echo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
+#line 26
  testRunner.And("I\'ve added the argument -u:SomeTestUser_0089DD7B-C9A9-4D38-9CEF-CB71E57AE1F6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 28
+#line 27
  testRunner.And("I\'ve added the argument -p:SomePassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 29
+#line 28
  testRunner.And(string.Format("I\'ve added the argument -l:{0}", logLevel), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 30
+#line 29
  testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 31
+#line 30
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 32
+#line 31
  testRunner.Then("the exit code should be -100002", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -141,21 +139,21 @@ this.ScenarioSetup(scenarioInfo);
                         "JetBrains RunAs"});
             table3.AddRow(new string[] {
                         "Settings:"});
-#line 33
+#line 32
  testRunner.And("the output should not contain:", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table4.AddRow(new string[] {
                         "Error: The user name or password is incorrect."});
-#line 37
+#line 36
  testRunner.And("the errors should contain:", ((string)(null)), table4, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table5.AddRow(new string[] {
                         "CreateProcessWithLogonW returns"});
-#line 40
+#line 39
  testRunner.And("the errors should not contain:", ((string)(null)), table5, "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -168,35 +166,35 @@ this.ScenarioSetup(scenarioInfo);
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("User does not see header and any error info when unknown user and in the off log " +
                     "mode", ((string[])(null)));
-#line 49
+#line 48
 this.ScenarioSetup(scenarioInfo);
-#line 50
+#line 49
  testRunner.Given("I have appended the file command.cmd by the line echo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 51
+#line 50
  testRunner.And("I\'ve added the argument -u:SomeTestUser_0089DD7B-C9A9-4D38-9CEF-CB71E57AE1F6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 52
+#line 51
  testRunner.And("I\'ve added the argument -p:SomePassword", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 53
+#line 52
  testRunner.And("I\'ve added the argument -l:off", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
+#line 53
  testRunner.And("I\'ve added the argument command.cmd", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 55
+#line 54
  testRunner.When("I run RunAs tool", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 56
+#line 55
  testRunner.Then("the exit code should be -100002", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table6.AddRow(new string[] {
                         ".+"});
-#line 57
+#line 56
  testRunner.And("the output should not contain:", ((string)(null)), table6, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                         ""});
             table7.AddRow(new string[] {
                         ".+"});
-#line 60
+#line 59
  testRunner.And("the errors should not contain:", ((string)(null)), table7, "And ");
 #line hidden
             this.ScenarioCleanup();
