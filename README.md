@@ -1,21 +1,24 @@
 # runAs
 
-The _runAs_ tool provides the ability to run a Windows process under the specified Windows user's account. To use with [TeamCity](https://www.jetbrains.com/teamcity/) see, the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin).
+[<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_TeamCityVSTestTestAdapter_Build) [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/) 
 
-You can download the _runAs_ tool from [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/)
+The _runAs_ CLT provides the ability to run a Windows process under the specified Windows user's account. To use with [TeamCity](https://www.jetbrains.com/teamcity/) see, the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin).
+
+Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe) [x86](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe) latest release of _runAs_ CLT.
 
 ## Command line arguments
 
 | Argument | Description | Optional | Default value|
 | ------------- |:-------------:|:-------------:|:-------------:|
-| -u:  | *"user"* or *"domain\user"* or *"user@domain"* |||
-| -p:   | user's password | X | empty |
+| -u: | *"user"* or *"domain\user"* or *"user@domain"* |||
+| -p: | user's password | X | empty |
 | -w: | working directory | X | empty |
 | -b: | base number for exit code | X | -100000 |
 | -e: | set an environment variable in the format "name=value" | X | |
 | -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
 | -il: | [integrity level](https://github.com/JetBrains/runAs/wiki#windows-integrity-mechanism) (*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
 | -s: | show mode for the created process *hide* or *normal* or *show* | X | *hide* |
+| -t: | self-testing, returns exit codes: **32** ready to work in the 32-bit mode, **64** ready to work in the 64-bit mode, **1** invoker has no administrative privileges when running under the Windows service, **2** invoker has no SeAssignPrimaryTokenPrivilege privilege (replace a process-level token) when running under the Windows service, **3** invoker has no SeTcbPrivilege privilege (act as part of the operating system) when running under the Windows service | X | |
 | -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
 | -c: | text file, containing any configuration arguments | | |
 | executable | executable file | | |
