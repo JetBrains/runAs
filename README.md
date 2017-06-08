@@ -1,15 +1,17 @@
 # runAs
 
+[<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_TeamCityVSTestTestAdapter_Build) [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/) 
+
 The _runAs_ tool provides the ability to run a Windows process under the specified Windows user's account. To use with [TeamCity](https://www.jetbrains.com/teamcity/) see, the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin).
 
-You can download the _runAs_ tool from [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/)
+Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe) [x86](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe) latest release of runAs CLT.
 
 ## Command line arguments
 
 | Argument | Description | Optional | Default value|
 | ------------- |:-------------:|:-------------:|:-------------:|
 | -u:  | *"user"* or *"domain\user"* or *"user@domain"* |||
-| -p:   | user's password | X | empty |
+| -p:  | user's password | X | empty |
 | -w: | working directory | X | empty |
 | -b: | base number for exit code | X | -100000 |
 | -e: | set an environment variable in the format "name=value" | X | |
