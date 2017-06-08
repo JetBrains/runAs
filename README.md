@@ -18,7 +18,7 @@ Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType
 | -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
 | -il: | [integrity level](https://github.com/JetBrains/runAs/wiki#windows-integrity-mechanism) (*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
 | -s: | show mode for the created process *hide* or *normal* or *show* | X | *hide* |
-| -t: | self-testing, returns exit codes: **32** if it's ready to work in the 32-bit mode, **64** if it's ready to work in the 64-bit mode, **1** if an invoker has no administrative privileges when running under the Windows service, **2** if an invoker has no SeAssignPrimaryTokenPrivilege privilege when running under the Windows service | X | |
+| -t: | self-testing, returns exit codes: **32** ready to work in the 32-bit mode, **64** ready to work in the 64-bit mode, **1** invoker has no administrative privileges when running under the Windows service, **2** invoker has no SeAssignPrimaryTokenPrivilege privilege (replace a process-level token) when running under the Windows service, **3** invoker has no SeTcbPrivilege privilege (act as part of the operating system) when running under the Windows service | X | |
 | -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
 | -c: | text file, containing any configuration arguments | | |
 | executable | executable file | | |
