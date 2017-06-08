@@ -1,1 +1,1 @@
-msbuild build.proj /t:CreatePackages
+msbuild build.proj /t:CreatePackages /p:Configuration=Release

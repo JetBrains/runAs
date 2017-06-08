@@ -61,10 +61,11 @@ wstring HelpUtilities::GetHelp()
 	help << endl << L"\t-s:" << ARG_SHOW_MODE << "\t\t- show mode (" << StringUtilities::Join(ShowModes, L"|") << L"), optional and \"" << SHOW_MODE_HIDE << L"\" by default.";
 	
 	help << endl << L"\t-t" << "\t\t\t- self-testing. Returns exit codes:";
-	help << endl << L"\t\t32\t\t\tready to work in the 32-bit mode";
-	help << endl << L"\t\t64\t\t\tready to work in the 64-bit mode";	
-	help << endl << L"\t\t" << EXIT_CODE_NO_ADMIN << L"\t\t\tinvoker has no administrative privileges when running under the Windows service";	
-	help << endl << L"\t\t" << EXIT_CODE_NO_ASSIGN_PRIMARY_TOKEN_PRIV << L"\t\t\tinvoker has no SeAssignPrimaryTokenPrivilege privilege when running under the Windows service";
+	help << endl << L"\t\t" << EXIT_CODE_READY_FOR_32 << "\t\t\tready to work in the 32-bit mode";
+	help << endl << L"\t\t" << EXIT_CODE_READY_FOR_64 << "\t\t\tready to work in the 64-bit mode";
+	help << endl << L"\t\t" << EXIT_CODE_NO_ADMIN << L"\t\t\tinvoker has no administrative privileges when running under the Windows service";
+	help << endl << L"\t\t" << EXIT_CODE_NO_ASSIGN_PRIMARY_TOKEN_PRIV << L"\t\t\tinvoker has no SeAssignPrimaryTokenPrivilege privilege (replace a process-level token) when running under the Windows service";
+    help << endl << L"\t\t" << EXIT_CODE_NO_TCB_PRIV << L"\t\t\tinvoker has no SeTcbPrivilege privilege (act as part of the operating system) when running under the Windows service";
 	
 	help << endl << L"\t-i:" << ARG_INHERITANCE_MODE << "\t- inheritance mode for the creating process, optional and \"" << INHERITANCE_MODE_AUTO << L"\" by default.";
 	help << endl << L"\t\t" << INHERITANCE_MODE_ON << L"\t\t\tenvironment variables will be inherited from a parent process";

@@ -38,3 +38,4 @@ JetBrains.runAs.IntegrationTests/obj/
 *.db
 /JetBrains.runAs/JetBrains.runAs.vcxproj.user
 /.vs/runAs/v14/.suo
+_ReSharper.Caches/

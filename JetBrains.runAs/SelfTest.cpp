@@ -40,7 +40,7 @@ Result<ExitCode> SelfTest::Run(const Settings& settings) const
 		}
 	}
 	
-	return Is64OS() ? 64 : 32;
+	return Is64OS() ? EXIT_CODE_READY_FOR_64 : EXIT_CODE_READY_FOR_32;
 }
 
 Result<SelfTestStatistic> SelfTest::GetStatistic(const Settings& settings) const
