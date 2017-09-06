@@ -2,9 +2,9 @@
 
 [<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows) [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/) 
 
-The _runAs_ CLT provides the ability to run a Windows process under the specified Windows user's account. To use with [TeamCity](https://www.jetbrains.com/teamcity/) see, the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin).
+The _runAs_ CLT provides the ability to run a Windows process under a specified Windows user account. **To use with [TeamCity](https://www.jetbrains.com/teamcity/), see the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin)**.
 
-Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe) [x86](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe) latest release of _runAs_ CLT.
+Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe) [x86](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe) the latest release of _runAs_ CLT.
 
 ## Command line arguments
 
@@ -41,15 +41,15 @@ WhoAmI.exe
 
 ## How it works
 
-The _runAs_ tool uses one of the three ways to create a process which are provided by Windows API:
+The _runAs_ tool uses one of the three ways provided by the Windows API to create a process:
 
-1. The Windows API call [_CreateProcessAsUser_](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682429(v=vs.85).aspx) to create process as a specified user directly and the integrity level can be elevated.
+1. The Windows API call [_CreateProcessAsUser_](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682429(v=vs.85).aspx) to create a process as a specified user directly; the integrity level can be elevated.
 
-2. The Windows API call [_CreateProcessWithLogonW_](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx) to create process as a specified user via a dedicated logon service and the integrity level cannot be elevated.
+2. The Windows API call [_CreateProcessWithLogonW_](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx) to create a process as a specified user via a dedicated logon service; the integrity level cannot be elevated.
 
 3. The Windows API call [_CreateProcessWithTokenW_](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682434(v=vs.85).aspx) to create process as a specified user via a dedicated logon service and try changing the integrity level.
 
-To use (1), the caller **needs _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **needs _SE_TCB_NAME_** privilege to act as a part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx). The _runAs_ tool uses it when working under a Windows service.
+To use (1), the caller **needs _SE_ASSIGNPRIMARYTOKEN_NAME_** privilege to replace a filtered (by Windows core) security access token with a primary (not filtered) security access token with the full set of privileges ( the "High" integrity leve). Also the caller **needs the _SE_TCB_NAME_** privilege to act as a part of the operating system. See this [page](https://msdn.microsoft.com/ru-ru/library/windows/desktop/ms682429(v=vs.85).aspx). The _runAs_ tool uses it when working under a Windows service.
 
 To use (2), the caller **needs a logon SID**. See [this](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682431(v=vs.85).aspx). _CreateProcessWithLogonW_ cannot be called from a process that is running under the _"LocalSystem"_ account, because the function uses the logon SID in the caller token, and the token for the _"LocalSystem"_ account does not contain this SID. The _runAs_ tool uses this approach when working in the user session.
 
