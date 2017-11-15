@@ -7,9 +7,9 @@
 		<version>$version$</version>
 		<authors>NikolayP</authors>
 		<owners>JetBrains</owners>
-		<licenseUrl>https://github.com/JetBrains/runAs/blob/master/LICENSE</licenseUrl>
+		<licenseUrl>https://github.com/JetBrains/runAs/raw/master/LICENSE</licenseUrl>
 		<projectUrl>https://github.com/JetBrains/runAs</projectUrl>
-		<iconUrl>https://www.jetbrains.com/_assets//shared/favicons/jetbrains.ico</iconUrl>
+		<iconUrl>https://github.com/JetBrains/runAs/raw/master/icon.png</iconUrl>
 		<!--requireLicenseAcceptance>false</requireLicenseAcceptance-->
 		<description>The runAs tool provides an ability to run the Windows process under the specified Windows user's account.</description>
 		<tags>JetBrains runAs tool</tags>

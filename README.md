@@ -1,10 +1,16 @@
+[<img src="http://jb.gg/badges/official.svg" />](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub) [<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows&guest=1) [![NuGet Version and Downloads count](https://buildstats.info/nuget/JetBrains.runAs)](https://www.nuget.org/packages/JetBrains.runAs)
 
-[![official JetBrains project](http://jb.gg/badges/official-plastic.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub) [<img src="http://teamcity.jetbrains.com/app/rest/builds/buildType:(id:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows)/statusIcon.svg"/>](http://teamcity.jetbrains.com/viewType.html?buildTypeId=TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows) [<img src="https://www.nuget.org/Content/Logos/nugetlogo.png" height="18">](https://www.nuget.org/packages/JetBrains.runAs/) 
 # runAs
 
-The _runAs_ CLT provides the ability to run a Windows process under a specified Windows user account. **To use with [TeamCity](https://www.jetbrains.com/teamcity/), see the [runAS plugin](https://github.com/JetBrains/teamcity-runas-plugin)**.
+The _runAs_ tool provides the ability to run a Windows process under a specified Windows user account. 
 
-Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe) [x86](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe) the latest release of _runAs_ CLT.
+## Download
+
+* [x64 runAs tool](https://teamcity.jetbrains.com/guestAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,branch:master,tags:release/artifacts/content/bin/x64/JetBrains.runAs.exe)
+
+* [x86 runAs tool](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType:TeamCityPluginsByJetBrains_TeamCityRunAs_CltForWindows,pinned:true,status:SUCCESS,tags:release/artifacts/content/bin/x86/JetBrains.runAs.exe)
+
+* [<img src="https://cdn.worldvectorlogo.com/logos/teamcity.svg" height="20" align="center"/> plugin](https://github.com/JetBrains/teamcity-runas-plugin)
 
 ## Command line arguments
 
@@ -26,13 +32,13 @@ Download [x64](https://teamcity.jetbrains.com/httpAuth/app/rest/builds/buildType
 
 For example:
 
-`JetBrains.runAs.exe -p:MyPassword -u:SomeDomain\SomeUserName WhoAmI.exe /ALL`
+```JetBrains.runAs.exe -p:MyPassword -u:SomeDomain\SomeUserName WhoAmI.exe /ALL```
 
 Or another example that does the same thing:
 
-`JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt`
+```JetBrains.runAs.exe -p:MyPassword -c:MyConfig.txt```
 
-where _"MyConfig.txt"_ is a text file containing the following lines:
+where _MyConfig.txt_ is a text file containing the following lines:
 ```
 -u:SomeDomain\SomeUserName
 WhoAmI.exe
