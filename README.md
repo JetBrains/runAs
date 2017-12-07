@@ -14,21 +14,21 @@ The _runAs_ tool provides the ability to run a Windows process under a specified
 
 ## Command line arguments
 
-| Argument | Description | Optional | Default value|
-| ------------- |:-------------:|:-------------:|:-------------:|
-| -u: | *"user"* or *"domain\user"* or *"user@domain"* |||
-| -p: | user's password | X | empty |
-| -w: | working directory | X | empty |
-| -b: | base number for exit code | X | -100000 |
-| -e: | set an environment variable in the format "name=value" | X | |
-| -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | X | *normal* |
-| -il: | [integrity level](https://github.com/JetBrains/runAs/wiki#windows-integrity-mechanism) (*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | X | *auto* |
-| -s: | show mode for the created process *hide* or *normal* or *show* | X | *hide* |
-| -t: | self-testing, returns exit codes: **32** ready to work in the 32-bit mode, **64** ready to work in the 64-bit mode, **1** invoker has no administrative privileges when running under the Windows service, **2** invoker has no SeAssignPrimaryTokenPrivilege privilege (replace a process-level token) when running under the Windows service, **3** invoker has no SeTcbPrivilege privilege (act as part of the operating system) when running under the Windows service | X | |
-| -i: |- set to **off** when environment variables should not be inherited from the parent process<br/>- set **on** when the environment variables should be inherited from the  parent process<br/>- set to **auto** when some environment variables should be inherited from the parent process| X | *auto* |
+| Argument | Description | Mandatory | Default value|
+| :------------- |:-------------|:-------------:|:-------------:|
+| -u: | *"user"* or *"domain\user"* or *"user@domain"* | :black_medium_small_square: ||
+| -p: | user's password | | empty |
+| -w: | working directory | | empty |
+| -b: | base number for exit code | | -100000 |
+| -e: | set an environment variable in the format "name=value" | | |
+| -l: | logging level (*debug*\|*normal*\|*errors*\|*off*) | | *normal* |
+| -il: | [integrity level](https://github.com/JetBrains/runAs/wiki#windows-integrity-mechanism) (*auto*\|*untrusted*\|*low*\|*medium*\|*medium_plus*\|*high*) | | *auto* |
+| -s: | show mode for the created process *hide* or *normal* or *show* | | *hide* |
+| -t: | self-testing, returns exit codes:<br/><br/>  **32** - ready to work in the 32-bit mode<br/><br/>  **64** - ready to work in the 64-bit mode<br/><br/>  **1** - invoker has no administrative privileges when running under the Windows service<br/><br/>  **2** - invoker has no SeAssignPrimaryTokenPrivilege privilege (replace a process-level token) when running under the Windows service<br/><br/>  **3** - invoker has no SeTcbPrivilege privilege (act as part of the operating system) when running under the Windows service | | |
+| -i: |  **off** - when environment variables should not be inherited from the parent process<br/><br/>  **on** - when the environment variables should be inherited from the  parent process<br/><br/>  **auto** - when some environment variables should be inherited from the parent process| | *auto* |
 | -c: | text file, containing any configuration arguments | | |
-| executable | executable file | | |
-| command_line_args | command line arguments, the maximum total length of *executable* and *command_line_args* is 1024 characters | X | empty |
+| executable | executable file |  :black_medium_small_square: | |
+| command_line_args | command line arguments, the maximum total length of *executable* and *command_line_args* is 1024 characters | | empty |
 
 For example:
 
