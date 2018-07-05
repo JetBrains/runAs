@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
+    <RootNamespace>JetBrains.dotnet_runas</RootNamespace>
+    <AssemblyName>dotnet-runas</AssemblyName>
+    <PackageId>dotnet-runas</PackageId>
+    <PackageType>DotnetCliTool</PackageType>
+    <IncludeAssets>All</IncludeAssets>
+    <Title>.NET CLI SDK runas tool</Title>
+    <Authors>NikolayP</Authors>
+    <PackageLicenseUrl>https://github.com/JetBrains/runAs/raw/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/JetBrains/runAs</PackageProjectUrl>
+    <PackageIconUrl>https://github.com/JetBrains/runAs/raw/master/icon.png</PackageIconUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Copyright>JetBrains</Copyright>
+    <Description>Runs a dotnet command under a specific account</Description>
+    <PackageTags>dotnet cli tool runas</PackageTags>
+    <IncludeAssets>All</IncludeAssets>    
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>TeamCity.snk</AssemblyOriginatorKeyFile>
+    <Company>JetBrains</Company>    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IoC.Container.Source" Version="1.1.2" />
+    <PackageReference Include="Microsoft.DotNet.Cli.Utils" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Any\x86\" />
+    <Folder Include="Any\x64\" />
+    <None Include="Any\runAs.cmd;Any\runAs.sh;Any\runAs_mac.sh">
+        <Pack>true</Pack>
+        <PackagePath>lib\Any</PackagePath>
+    </None>
+    <None Include="..\bin\Release\x86\JetBrains.runAs.exe" Link="Any\x86\JetBrains.runAs.exe">
+        <Pack>true</Pack>
+        <PackagePath>lib\Any\x86</PackagePath>
+    </None>
+    <None Include="..\bin\Release\x64\JetBrains.runAs.exe" Link="Any\x64\JetBrains.runAs.exe">
+        <Pack>true</Pack>
+        <PackagePath>lib\Any\x64</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

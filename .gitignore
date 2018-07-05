@@ -33,9 +33,10 @@ packages/
 temp/
 ipch/
 *.sdf
-JetBrains.runAs.IntegrationTests/obj/
+**/obj/
 *.opendb
 *.db
-/JetBrains.runAs/JetBrains.runAs.vcxproj.user
+**/*.vcxproj.user
 /.vs/runAs/v14/.suo
 _ReSharper.Caches/
+.vs/

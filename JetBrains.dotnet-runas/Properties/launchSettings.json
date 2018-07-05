@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JetBrains.dotnet-runas": {
+      "commandName": "Project",
+      "commandLineArgs": "-u:someuser -p:aaa --version"
+    }
+  }
+}
