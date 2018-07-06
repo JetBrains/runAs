@@ -13,6 +13,8 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class ToolEnvironment : IEnvironment
     {
+        private readonly string _baseToolsPath;
+
         public ToolEnvironment([NotNull] IFileSystem fileSystem)
         {
             if (fileSystem == null) throw new ArgumentNullException(nameof(fileSystem));
@@ -32,33 +34,29 @@
                 throw new ToolException("Cannot find tools.");
             }
 
-            ToolsPath = targetDirectory[0];
+            _baseToolsPath = targetDirectory[0];
         }
 
-        public string ToolsPath { get; }
+        public string ToolsPath => Path.Combine(_baseToolsPath, OsType.ToString());
 
         public string DotnetPath { get; }
 
-        public string ScriptName
+        public string ScriptExtension
         {
             get
             {
-                if (OsPlatform == OSPlatform.Windows)
+                switch (OsType)
                 {
-                    return "runAs.cmd";
-                }
+                    case OSType.Windows:
+                        return ".cmd";
 
-                if (OsPlatform == OSPlatform.Linux)
-                {
-                    return "runAs.sh";
-                }
-                
-                if (OsPlatform == OSPlatform.OSX)
-                {
-                    return "runAs_mac.sh";
-                }
+                    case OSType.Linux:
+                    case OSType.OSX:
+                        return ".cmd";
 
-                throw new ToolException("Unsupported OS.");
+                    default:
+                        throw new ToolException("Unsupported OS.");
+                }
             }
         }
 
@@ -82,23 +80,23 @@
             }
         }
 
-        private static OSPlatform OsPlatform
+        private static OSType OsType
         {
             get
             {
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    return OSPlatform.Windows;
+                    return OSType.Windows;
                 }
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 {
-                    return OSPlatform.Linux;
+                    return OSType.Linux;
                 }
 
                 if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 {
-                    return OSPlatform.OSX;
+                    return OSType.OSX;
                 }
 
                 throw new ToolException("Unsupported OS.");

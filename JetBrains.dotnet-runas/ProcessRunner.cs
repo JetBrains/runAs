@@ -1,8 +1,10 @@
 ﻿namespace JetBrains.RunAs
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using IoC;
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
@@ -12,10 +14,11 @@
         [NotNull] private readonly IConsole _сonsole;
 
         public ProcessRunner(
-            [NotNull] IToolProcess process,
-            [NotNull] IConsole сonsole)
+            [NotNull] IEnumerable<IToolProcess> processes,
+            [NotNull] IConsole сonsole,
+            [NotNull] Configuration configuration)
         {
-            _process = process ?? throw new ArgumentNullException(nameof(process));
+            _process = (processes ?? throw new ArgumentNullException(nameof(processes))).Single(i => i.Mode == configuration.Mode);
             _сonsole = сonsole ?? throw new ArgumentNullException(nameof(сonsole));
         }
 

@@ -29,19 +29,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Any\x86\" />
-    <Folder Include="Any\x64\" />
-    <None Include="Any\runAs.cmd;Any\runAs.sh;Any\runAs_mac.sh">
+    <None Include="Any\Windows\runAs.cmd;Any\Windows\init.cmd;Any\Windows\grantAccess.ps1">
         <Pack>true</Pack>
-        <PackagePath>lib\Any</PackagePath>
+        <PackagePath>lib\Any\Windows</PackagePath>
     </None>
-    <None Include="..\bin\Release\x86\JetBrains.runAs.exe" Link="Any\x86\JetBrains.runAs.exe">
+    <None Include="Any\Linux\runAs.sh;Any\Linux\init.sh">
         <Pack>true</Pack>
-        <PackagePath>lib\Any\x86</PackagePath>
+        <PackagePath>lib\Any\Linux</PackagePath>
     </None>
-    <None Include="..\bin\Release\x64\JetBrains.runAs.exe" Link="Any\x64\JetBrains.runAs.exe">
+    <None Include="Any\OSX\runAs.sh;Any\OSX\init.sh">
         <Pack>true</Pack>
-        <PackagePath>lib\Any\x64</PackagePath>
+        <PackagePath>lib\Any\OSX</PackagePath>
+    </None>
+    <None Include="..\bin\Release\x86\JetBrains.runAs.exe" Link="Any\Windows\x86\JetBrains.runAs.exe">
+        <Pack>true</Pack>
+        <PackagePath>lib\Any\Windows\x86</PackagePath>
+    </None>
+    <None Include="..\bin\Release\x64\JetBrains.runAs.exe" Link="Any\Windows\x64\JetBrains.runAs.exe">
+        <Pack>true</Pack>
+        <PackagePath>lib\Any\Windows\x64</PackagePath>
     </None>
   </ItemGroup>
 

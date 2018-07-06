@@ -9,7 +9,7 @@
 
         [NotNull] string DotnetPath { get; }
 
-        [NotNull] string ScriptName { get; }
+        [NotNull] string ScriptExtension { get; }
 
         [NotNull] IEnumerable<string> Args { get; }
 

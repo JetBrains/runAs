@@ -9,34 +9,30 @@
     {
         public static int Main()
         {
-            using (var container = Container.Create().Using<IoCConfiguration>())
+            try
             {
-                return container.Resolve<Program>().Run();
+                using (var container = Container.Create().Using<IoCConfiguration>())
+                {
+                    return container.Resolve<Program>().Run();
+                }
+            }
+            catch (ToolException parseException)
+            {
+                System.Console.Error.WriteLine(parseException.Message);
+                return 1;
             }
         }
 
         [NotNull] private readonly IProcessRunner _processRunner;
-        [NotNull] private readonly IConsole _console;
 
-        internal Program(
-            [NotNull] IProcessRunner processRunner,
-            [NotNull] IConsole console)
+        internal Program([NotNull] IProcessRunner processRunner)
         {
             _processRunner = processRunner ?? throw new ArgumentNullException(nameof(processRunner));
-            _console = console ?? throw new ArgumentNullException(nameof(console));
         }
 
         private int Run()
         {
-            try
-            {
-                return _processRunner.Run();
-            }
-            catch (ToolException parseException)
-            {
-                _console.WriteErrLine(parseException.Message);
-                return 1;
-            }
+            return _processRunner.Run();
         }
     }
 }

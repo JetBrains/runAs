@@ -24,8 +24,7 @@
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
             _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));
             _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
-
-            var scriptName = Path.Combine(_environment.ToolsPath, environment.ScriptName);
+            var scriptName = Path.Combine(_environment.ToolsPath, $"runAs{environment.ScriptExtension}");
             var settingsArgsFileName = fileSystem.CreateTempFile(".args", Enumerable.Repeat($"-u:{configuration.UserName}", 1).Concat(configuration.RunAsArguments));
             _tempFiles.Add(settingsArgsFileName);
             var commandArgsFileName = fileSystem.CreateTempFile(".args", Enumerable.Repeat(environment.DotnetPath, 1).Concat(configuration.CommandArguments));
@@ -41,6 +40,8 @@
 
             Process = new Process { StartInfo = startInfo };
         }
+
+        public Mode Mode => Mode.Run;
 
         public Process Process { get; }
 

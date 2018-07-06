@@ -6,6 +6,8 @@
 
     internal interface IToolProcess: IDisposable
     {
+        Mode Mode { get; }
+
         [NotNull] Process Process { get; }
     }
 }
