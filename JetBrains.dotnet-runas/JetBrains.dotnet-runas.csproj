@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp1.0;netcoreapp1.1;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
-    <RootNamespace>JetBrains.dotnet_runas</RootNamespace>
+    <RootNamespace>JetBrains.RunAs</RootNamespace>
     <AssemblyName>dotnet-runas</AssemblyName>
     <PackageId>dotnet-runas</PackageId>
     <PackageType>DotnetCliTool</PackageType>

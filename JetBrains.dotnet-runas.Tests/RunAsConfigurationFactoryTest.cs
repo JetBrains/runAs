@@ -1,4 +1,4 @@
-namespace JetBrains.dotnet_runas.Tests
+namespace JetBrains.RunAs.Tests
 {
     using System.Collections;
     using System.Collections.Generic;
@@ -19,18 +19,18 @@ namespace JetBrains.dotnet_runas.Tests
             IEnumerable<string> commandArguments)
         {
             // Given
-            var environment = new Mock<IRunAsEnvironment>();
+            var environment = new Mock<IEnvironment>();
             environment.SetupGet(i => i.Args).Returns(args);
-            var configurationFactory = new RunAsConfigurationFactory(environment.Object);
-            RunAsConfiguration configuration = null;
-            RunAsException exception = null;
+            var configurationFactory = new ConfigurationFactory(environment.Object);
+            Configuration configuration = null;
+            ToolException exception = null;
 
             // When
             try
             {
                 configuration = configurationFactory.Create();
             }
-            catch (RunAsException ex)
+            catch (ToolException ex)
             {
                 exception = ex;
             }

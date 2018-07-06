@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <RootNamespace>JetBrains.dotnet_runas.Tests</RootNamespace>
+    <RootNamespace>JetBrains.RunAs.Tests</RootNamespace>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>TeamCity.snk</AssemblyOriginatorKeyFile>
     <IsPackable>false</IsPackable>

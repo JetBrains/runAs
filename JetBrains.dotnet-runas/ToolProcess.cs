@@ -1,4 +1,4 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Collections.Generic;
@@ -9,17 +9,17 @@
     using IoC;
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    internal class RunAsProcess : IProcess
+    internal class ToolProcess : IToolProcess
     {
-        [NotNull] private readonly IRunAsEnvironment _environment;
+        [NotNull] private readonly IEnvironment _environment;
         [NotNull] private readonly IFileSystem _fileSystem;
-        [NotNull] private readonly RunAsConfiguration _configuration;
+        [NotNull] private readonly Configuration _configuration;
         [NotNull] private readonly List<string> _tempFiles = new List<string>();
 
-        public RunAsProcess(
-            [NotNull] IRunAsEnvironment environment,
+        public ToolProcess(
+            [NotNull] IEnvironment environment,
             [NotNull] IFileSystem fileSystem,
-            [NotNull] RunAsConfiguration configuration)
+            [NotNull] Configuration configuration)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
             _fileSystem = fileSystem ?? throw new ArgumentNullException(nameof(fileSystem));

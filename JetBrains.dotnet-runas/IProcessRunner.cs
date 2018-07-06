@@ -1,4 +1,4 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     internal interface IProcessRunner
     {

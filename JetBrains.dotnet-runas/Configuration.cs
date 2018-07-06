@@ -1,12 +1,12 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Collections.Generic;
     using IoC;
 
-    internal class RunAsConfiguration
+    internal class Configuration
     {
-        public RunAsConfiguration([NotNull] string userName, [NotNull] string password, [NotNull] IEnumerable<string> runAsArguments, [NotNull] IEnumerable<string> commandArguments)
+        public Configuration([NotNull] string userName, [NotNull] string password, [NotNull] IEnumerable<string> runAsArguments, [NotNull] IEnumerable<string> commandArguments)
         {
             UserName = userName ?? throw new ArgumentNullException(nameof(userName));
             Password = password ?? throw new ArgumentNullException(nameof(password));

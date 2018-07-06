@@ -1,4 +1,4 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -32,7 +32,7 @@
             {
                 return _processRunner.Run();
             }
-            catch (RunAsException parseException)
+            catch (ToolException parseException)
             {
                 _console.WriteErrLine(parseException.Message);
                 return 1;

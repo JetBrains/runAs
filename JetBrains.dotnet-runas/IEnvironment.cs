@@ -1,9 +1,9 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System.Collections.Generic;
     using IoC;
 
-    internal interface IRunAsEnvironment
+    internal interface IEnvironment
     {
         [NotNull] string ToolsPath { get; }
 

@@ -1,28 +1,27 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using IoC;
 
     // ReSharper disable once ClassNeverInstantiated.Global
-    internal class RunAsConfigurationFactory : IRunAsConfigurationFactory
+    internal class ConfigurationFactory : IConfigurationFactory
     {
-        [NotNull] private readonly IRunAsEnvironment _runAsEnvironment;
+        [NotNull] private readonly IEnvironment _environment;
 
-        public RunAsConfigurationFactory([NotNull] IRunAsEnvironment runAsEnvironment)
+        public ConfigurationFactory([NotNull] IEnvironment environment)
         {
-            _runAsEnvironment = runAsEnvironment ?? throw new ArgumentNullException(nameof(runAsEnvironment));
+            _environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
-        public RunAsConfiguration Create()
+        public Configuration Create()
         {
             var parsinRunAsArgs = true;
             var runAsArgs = new List<string>();
             var commandArguments = new List<string>();
             string userName = null;
             string password = null;
-            foreach (var nextArg in _runAsEnvironment.Args)
+            foreach (var nextArg in _environment.Args)
             {
                 var arg = nextArg.TrimStart();
                 if (parsinRunAsArgs)
@@ -58,15 +57,15 @@
 
             if (string.IsNullOrWhiteSpace(userName))
             {
-                throw new RunAsException("Username was not specified.");
+                throw new ToolException("Username was not specified.");
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                throw new RunAsException("Password was not specified.");
+                throw new ToolException("Password was not specified.");
             }
 
-            return new RunAsConfiguration(userName, password, runAsArgs.AsReadOnly(), commandArguments.AsReadOnly());
+            return new Configuration(userName, password, runAsArgs.AsReadOnly(), commandArguments.AsReadOnly());
         }
 
         [NotNull]

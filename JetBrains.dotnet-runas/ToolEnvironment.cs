@@ -1,4 +1,4 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Collections.Generic;
@@ -11,9 +11,9 @@
     using Microsoft.DotNet.Cli.Utils;
 
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    internal class RunAsEnvironment : IRunAsEnvironment
+    internal class ToolEnvironment : IEnvironment
     {
-        public RunAsEnvironment([NotNull] IFileSystem fileSystem)
+        public ToolEnvironment([NotNull] IFileSystem fileSystem)
         {
             if (fileSystem == null) throw new ArgumentNullException(nameof(fileSystem));
             DotnetPath = new Muxer().MuxerPath;
@@ -29,7 +29,7 @@
 
             if (targetDirectory.Length != 1)
             {
-                throw new RunAsException("Cannot find tools.");
+                throw new ToolException("Cannot find tools.");
             }
 
             ToolsPath = targetDirectory[0];
@@ -58,7 +58,7 @@
                     return "runAs_mac.sh";
                 }
 
-                throw new RunAsException("Unsupported OS.");
+                throw new ToolException("Unsupported OS.");
             }
         }
 
@@ -101,7 +101,7 @@
                     return OSPlatform.OSX;
                 }
 
-                throw new RunAsException("Unsupported OS.");
+                throw new ToolException("Unsupported OS.");
             }
         }
     }

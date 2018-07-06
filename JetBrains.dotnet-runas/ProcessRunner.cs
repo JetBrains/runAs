@@ -1,4 +1,4 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Diagnostics;
@@ -8,11 +8,11 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class ProcessRunner : IProcessRunner, IDisposable
     {
-        [NotNull] private readonly IProcess _process;
+        [NotNull] private readonly IToolProcess _process;
         [NotNull] private readonly IConsole _сonsole;
 
         public ProcessRunner(
-            [NotNull] IProcess process,
+            [NotNull] IToolProcess process,
             [NotNull] IConsole сonsole)
         {
             _process = process ?? throw new ArgumentNullException(nameof(process));

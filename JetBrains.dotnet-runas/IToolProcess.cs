@@ -1,10 +1,10 @@
-﻿namespace JetBrains.dotnet_runas
+﻿namespace JetBrains.RunAs
 {
     using System;
     using System.Diagnostics;
     using IoC;
 
-    internal interface IProcess: IDisposable
+    internal interface IToolProcess: IDisposable
     {
         [NotNull] Process Process { get; }
     }
