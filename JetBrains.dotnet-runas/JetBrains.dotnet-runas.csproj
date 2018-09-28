@@ -10,7 +10,7 @@
     <PackageId>dotnet-runas</PackageId>
     <PackageType>DotnetCliTool</PackageType>
     <IncludeAssets>All</IncludeAssets>
-    <Title>.NET CLI SDK runas tool</Title>
+    <Title>runas .NET Core Global Tool</Title>
     <Authors>NikolayP</Authors>
     <PackageLicenseUrl>https://github.com/JetBrains/runAs/raw/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/JetBrains/runAs</PackageProjectUrl>
@@ -18,7 +18,7 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Copyright>JetBrains</Copyright>
     <Description>Runs a dotnet command under a specific account</Description>
-    <PackageTags>dotnet cli tool runas</PackageTags>
+    <PackageTags>dotnet core cli global tool runas user account</PackageTags>
     <IncludeAssets>All</IncludeAssets>    
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>TeamCity.snk</AssemblyOriginatorKeyFile>
