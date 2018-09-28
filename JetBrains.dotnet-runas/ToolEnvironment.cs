@@ -24,7 +24,7 @@
             string[] targetDirectory;
             do
             {
-                targetDirectory = fileSystem.GetDirectories(curDirectory, "Any").ToArray();
+                targetDirectory = fileSystem.GetDirectories(Path.Combine("..", Path.Combine("..", curDirectory)), "common").ToArray();
                 curDirectory = fileSystem.GetParent(curDirectory);
             }
             while (curDirectory !=null && targetDirectory.Length == 0);
