@@ -1,36 +1,18 @@
 # runAs
 
-## runas for dotnet CLI [![NuGet](https://buildstats.info/nuget/dotnet-runas?includePreReleases=true)](https://www.nuget.org/packages/dotnet-runas) [![JetBrains incubator project](http://jb.gg/badges/incubator.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
+## runas .NET Core Global Tool [![NuGet](https://buildstats.info/nuget/dotnet-runas?includePreReleases=true)](https://www.nuget.org/packages/dotnet-runas) [![JetBrains incubator project](http://jb.gg/badges/incubator.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 
-The _runas_ CLI tool provides the ability to run a dotnet process under a specified user account. This tool is compatible with any dotnet CLI commands but the most obvious scenario is running dotnet tests:
+The _runas_ [.NET Core Global Tool](https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools) allows to run a dotnet process under a specified user account. This tool is compatible with any dotnet CLI commands but the most obvious scenario is running dotnet tests:
 
-- add the [CLI tool reference](https://www.nuget.org/packages/dotnet-runas) to your dotnet test project like `<DotNetCliToolReference Include="dotnet-runas" Version="V.V.V" />` where _V.V.V_ might be a latest version of the [nuget package](https://www.nuget.org/packages/dotnet-runas). For example for xunit test the project file looks like:
+- to install the _runas_ tool, run the command line `dotnet tool install -g dotnet-runas`
 
-``` xml
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
-    <DotNetCliToolReference Include="dotnet-runas" Version="1.0.0-beta80" />
-  </ItemGroup>
-</Project>
-```
+- run tests under a specified user account like `dotnet runas -u:username -p:password test`
 
-- specify the environment variable `NUGET_PACKAGES` as a path to the nuget package directory. :warning: It is important to note this path should be accessable for your user account and for the target "runas" user account.
-
-- run command `dotnet restore` to restore dotnet CLI tools
-
-- run dotnet tests like `dotnet runas -u:username -p:password test`
+- to uninstall the _runas_ tool, run the command line `dotnet tool uninstall -g dotnet-runas`
 
 For Windows operation system it is possible to specify elevated permissions and [other parameters](https://github.com/JetBrains/runAs/wiki/runAs-tool). 
 
-:construction: For Linix and OSX operation systems _username_ and _password_ paramers are available.
+:construction: For Linux and OSX operation systems _username_ and _password_ paramers are available.
 
 ## [<img src="https://cdn.worldvectorlogo.com/logos/teamcity.svg" height="20" align="center"/> plugin](https://github.com/JetBrains/teamcity-runas-plugin) [<img src="http://jb.gg/badges/official.svg" />](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 
