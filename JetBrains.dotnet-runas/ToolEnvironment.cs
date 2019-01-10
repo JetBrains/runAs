@@ -41,25 +41,6 @@
 
         public string DotnetPath { get; }
 
-        public string ScriptExtension
-        {
-            get
-            {
-                switch (OsType)
-                {
-                    case OSType.Windows:
-                        return ".cmd";
-
-                    case OSType.Linux:
-                    case OSType.OSX:
-                        return ".cmd";
-
-                    default:
-                        throw new ToolException("Unsupported OS.");
-                }
-            }
-        }
-
         public IEnumerable<string> Args => Environment.GetCommandLineArgs().Skip(1);
 
         public int Bitness
@@ -80,7 +61,7 @@
             }
         }
 
-        private static OSType OsType
+        public OSType OsType
         {
             get
             {

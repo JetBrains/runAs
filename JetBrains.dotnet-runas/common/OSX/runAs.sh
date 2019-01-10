@@ -8,10 +8,12 @@ then
     args=$(cat "$argsFile")
     eval "command="$2""
     eval "password="$4""
-
-    # ensure runAs user has the read/write access for temp directory
-    chmod a+rwX "$TMPDIR"
-
+    
+    newCommand=/tmp/$(basename $command)
+    mv "$command" "$newCommand"
+    command=$newCommand	
+    chmod a+rwx "$command"
+    
     # if root
     if [[ "$EUID" -eq 0 ]];
     then
@@ -25,46 +27,12 @@ then
             su "$args" -c "\"$command\""
             exit $?
         else
-            echo "Can't run under ROOT user"
+            echo "Can't run under ROOT user."
             exit 255
         fi
     fi
 
-    # if not root
-    # Check an agent will be able to remove temporary files
-    tmpScriptFile=$(mktemp "$TMPDIR"/XXXXXXXX)
-    tmpFile=$tmpScriptFile.tmp
-
-    echo "#!/bin/bash" > "$tmpScriptFile"
-    echo "touch \"$tmpFile\"" >> "$tmpScriptFile"
-    chmod a+rwx "$tmpScriptFile"
-
-    # Create temp file under the runAs user
-    "${0}" runAs "$args" "$tmpScriptFile" "$password" arg5 &>/dev/null
-    exitCode=$?
-
-    if [ "$exitCode" != "0" ];
-    then
-      echo "User \"$args\" has no required permissions for target directory \"$TMPDIR\". Make sure this user has permissions to write and to execute files in the target directory (rwx) and to search (X) in all its parent directories"
-      exit 255
-    fi
-
-    # check that agent won't be able to remove temporary files created by the build step
-    rm "$tmpFile" &>/dev/null
-
-    if [ -f "$tmpFile" ]; then
-      rm "$tmpScriptFile" &>/dev/null
-      echo "Incorrect runAs configuration: agent won't be able to remove temporary files created by the build step, see teamcity-agent.log for details."
-      exit 1
-    else
-      # forcible remove tmp file
-      echo "#!/bin/bash" > "$tmpScriptFile"
-      echo "rm \"$tmpFile\" &>/dev/null" >> "$tmpScriptFile"
-      chmod a+rwx "$tmpScriptFile"
-      "${0}" runAs "$args" "$tmpScriptFile" "$password" arg5 &>/dev/null
-      rm "$tmpScriptFile" &>/dev/null
-    fi
-
+    # if not root	
     # Run as user
     "${0}" runAs "$args" "$command" "$password" arg5
 
@@ -82,7 +50,15 @@ then
         socatExitCode=$?
         if [ "$socatExitCode" != "0" ];
         then
-            echo "socat was not installed, see https://github.com/JetBrains/teamcity-runas-plugin/wiki/How-to-install#teamcity-agent-on-linux"
+            # try installing socat
+            brew install socat &>/dev/null
+        fi
+        
+        socat -h &>/dev/null
+        socatExitCode=$?
+        if [ "$socatExitCode" != "0" ];
+        then
+            echo "socat was not installed, see http://macappstore.org/socat/."
             exit 255
         fi
 
@@ -90,10 +66,13 @@ then
         command="$3"
         password="$4"
 
-        tmpFile=$(mktemp "$TMPDIR"/XXXXXXXX)
+        tmpFile=$(mktemp)
         touch "$tmpFile"
-        chmod a+rw "$tmpFile"
-
+        newFile=/tmp/$(basename $tmpFile)
+        mv "$tmpFile" "$newFile"
+        tmpFile=$newFile	
+        chmod a+rwx "$tmpFile"
+        
         cmd="'${0}' su '$tmpFile' '$command' '$args' arg5"
         eval "export -- SOCAT_CMD=\"$cmd\""
 
@@ -109,7 +88,7 @@ then
 
             if [[ $attempts -eq 0 ]];
             then
-                echo "Error during sending password"
+                echo "Error during sending password."
                 exit 255
             fi
 
@@ -142,12 +121,13 @@ then
     # change the user
     # su (su, tmp_file, command, args, arg5)
     if [ "$1" = "su" ];
-    then
+    then 
         tmpFile="$2"
         command="$3"
         args="$4"
-
-        su "$args" -c "\"$command\""
+        
+        #/bin/bash $command
+        su "$args" -c "$command"
         exitCode=$?
 
         echo -e "$exitCode\n" > "$tmpFile"
@@ -166,7 +146,7 @@ else
       exit 0
     fi
 
-    echo "socat is not installed, see https://github.com/JetBrains/teamcity-runas-plugin/wiki/How-to-install#on-linux" >&2
+    echo socat is not installed, see http://macappstore.org/socat/ >&2
 fi
 
 echo Usage: runAs.sh settings_file_name command_file_name bitness password >&2

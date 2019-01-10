@@ -6,8 +6,8 @@
 
     internal interface IToolProcess: IDisposable
     {
-        Mode Mode { get; }
+        bool IsSupported(OSType osType);
 
-        [NotNull] Process Process { get; }
+        [NotNull] Process CreateProcess();
     }
 }

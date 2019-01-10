@@ -31,18 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="common\Windows\runAs.cmd;common\Windows\init.cmd;common\Windows\grantAccess.ps1">
-        <Pack>true</Pack>
-        <PackagePath>common\Windows</PackagePath>
-    </None>
-    <None Include="common\Linux\runAs.sh;common\Linux\init.sh">
-        <Pack>true</Pack>
-        <PackagePath>common\Linux</PackagePath>
-    </None>
-    <None Include="common\OSX\runAs.sh;common\OSX\init.sh">
-        <Pack>true</Pack>
-        <PackagePath>common\OSX</PackagePath>
-    </None>
     <None Include="..\bin\Release\x86\JetBrains.runAs.exe" Link="common\Windows\x86\JetBrains.runAs.exe">
         <Pack>true</Pack>
         <PackagePath>common\Windows\x86</PackagePath>

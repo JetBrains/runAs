@@ -16,7 +16,7 @@
 
         public Configuration Create()
         {
-            var parsinRunAsArgs = true;
+            var parsingRunAsArgs = true;
             var runAsArgs = new List<string>();
             var commandArguments = new List<string>();
             var userName = string.Empty;
@@ -24,7 +24,7 @@
             foreach (var nextArg in _environment.Args)
             {
                 var arg = nextArg.TrimStart();
-                if (parsinRunAsArgs)
+                if (parsingRunAsArgs)
                 {
                     if (arg.Length >= 2 && arg[0] == '-' && char.IsLetter(arg[1]))
                     {
@@ -46,7 +46,7 @@
                     else
                     {
                         commandArguments.Add(arg);
-                        parsinRunAsArgs = false;
+                        parsingRunAsArgs = false;
                     }
                 }
                 else
@@ -60,9 +60,7 @@
                 throw new ToolException("Username was not specified.");
             }
 
-            var initMode = string.IsNullOrEmpty(password) && runAsArgs.Count == 0 && commandArguments.Count == 0;
-
-            if (!initMode && string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(password))
             {
                 throw new ToolException("Password was not specified.");
             }
@@ -71,8 +69,7 @@
                 userName,
                 password,
                 runAsArgs.AsReadOnly(),
-                commandArguments.AsReadOnly(),
-                initMode ? Mode.Initialize : Mode.Run);
+                commandArguments.AsReadOnly());
         }
 
         [NotNull]

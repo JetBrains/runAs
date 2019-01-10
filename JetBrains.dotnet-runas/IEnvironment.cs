@@ -9,10 +9,10 @@
 
         [NotNull] string DotnetPath { get; }
 
-        [NotNull] string ScriptExtension { get; }
-
         [NotNull] IEnumerable<string> Args { get; }
 
         int Bitness { get; }
+
+        OSType OsType { get; }
     }
 }

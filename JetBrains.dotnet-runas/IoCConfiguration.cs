@@ -15,8 +15,8 @@
             yield return container.Bind<IEnvironment>().As(Lifetime.Singleton).To<ToolEnvironment>();
             yield return container.Bind<Configuration>().As(Lifetime.Singleton).To(ctx => ctx.Container.Inject<IConfigurationFactory>().Create());
             yield return container.Bind<IFileSystem>().As(Lifetime.Singleton).To<FileSystem>();
-            yield return container.Bind<IToolProcess>().Tag(Mode.Run).To<ToolProcess>();
-            yield return container.Bind<IToolProcess>().Tag(Mode.Initialize).To<InitProcess>();
+            yield return container.Bind<IToolProcess>().Tag(OSType.Windows).To<ToolProcessForWindows>();
+            yield return container.Bind<IToolProcess>().Tag(OSType.Linux).To<ToolProcessForLinux>();
         }
     }
 }

@@ -11,23 +11,24 @@
     internal class ProcessRunner : IProcessRunner, IDisposable
     {
         [NotNull] private readonly IToolProcess _process;
-        [NotNull] private readonly IConsole _сonsole;
+        [NotNull] private readonly IConsole _console;
 
         public ProcessRunner(
             [NotNull] IEnumerable<IToolProcess> processes,
-            [NotNull] IConsole сonsole,
-            [NotNull] Configuration configuration)
+            [NotNull] IConsole console,
+            [NotNull] IEnvironment environment)
         {
-            _process = (processes ?? throw new ArgumentNullException(nameof(processes))).Single(i => i.Mode == configuration.Mode);
-            _сonsole = сonsole ?? throw new ArgumentNullException(nameof(сonsole));
+            if (environment == null) throw new ArgumentNullException(nameof(environment));
+            _process = (processes ?? throw new ArgumentNullException(nameof(processes))).Single(i => i.IsSupported(environment.OsType));            
+            _console = console ?? throw new ArgumentNullException(nameof(console));
         }
 
         public int Run()
         {
-            void OnOutputDataReceived(object sender, DataReceivedEventArgs args) => _сonsole.WriteStdLine(args.Data);
-            void OnErrorDataReceived(object sender, DataReceivedEventArgs args) => _сonsole.WriteErrLine(args.Data);
+            void OnOutputDataReceived(object sender, DataReceivedEventArgs args) => _console.WriteStdLine(args.Data);
+            void OnErrorDataReceived(object sender, DataReceivedEventArgs args) => _console.WriteErrLine(args.Data);
 
-            var process = _process.Process;
+            var process = _process.CreateProcess();
             process.OutputDataReceived += OnOutputDataReceived;
             process.ErrorDataReceived += OnErrorDataReceived;
 
