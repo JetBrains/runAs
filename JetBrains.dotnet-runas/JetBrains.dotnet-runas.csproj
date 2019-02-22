@@ -26,7 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IoC.Container.Source" Version="1.1.11" PrivateAssets="All" />
+    <PackageReference Include="IoC.Container.Source" Version="1.1.12" PrivateAssets="All" />
     <PackageReference Include="Microsoft.DotNet.Cli.Utils" Version="2.0.0" IncludeAssets="All" />
   </ItemGroup>
 
