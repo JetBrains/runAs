@@ -2,7 +2,7 @@
   "profiles": {
     "JetBrains.dotnet-runas": {
       "commandName": "Project",
-      "commandLineArgs": "-u:someuser"
+      "commandLineArgs": "-u:test -p:test123 --version"
     }
   }
 }
