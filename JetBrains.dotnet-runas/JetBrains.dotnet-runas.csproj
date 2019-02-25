@@ -4,7 +4,7 @@
     <PackAsTool>true</PackAsTool>
     <IsPackable>true</IsPackable>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
     <RootNamespace>JetBrains.RunAs</RootNamespace>
     <AssemblyName>dotnet-runas</AssemblyName>
     <PackageId>dotnet-runas</PackageId>
@@ -25,8 +25,9 @@
     <Company>JetBrains</Company>    
   </PropertyGroup>
 
+
   <ItemGroup>
-    <PackageReference Include="IoC.Container.Source" Version="1.1.12" PrivateAssets="All" />
+    <PackageReference Include="IoC.Container" Version="1.1.12" />
     <PackageReference Include="Microsoft.DotNet.Cli.Utils" Version="2.0.0" IncludeAssets="All" />
   </ItemGroup>
 
@@ -38,6 +39,22 @@
     <None Include="..\bin\Release\x64\JetBrains.runAs.exe" Link="common\Windows\x64\JetBrains.runAs.exe">
         <Pack>true</Pack>
         <PackagePath>common\Windows\x64</PackagePath>
+    </None>
+    <None Include="common\Windows\runAs.cmd">
+        <Pack>true</Pack>
+        <PackagePath>common\Windows</PackagePath>
+    </None>
+    <None Include="common\Windows\grantAccess.ps1">
+        <Pack>true</Pack>
+        <PackagePath>common\Windows</PackagePath>
+    </None>
+    <None Include="common\OSX\runAs.sh">
+        <Pack>true</Pack>
+        <PackagePath>common\OSX</PackagePath>
+    </None>
+    <None Include="common\Linux\runAs.sh">
+        <Pack>true</Pack>
+        <PackagePath>common\Linux</PackagePath>
     </None>
   </ItemGroup>
 
