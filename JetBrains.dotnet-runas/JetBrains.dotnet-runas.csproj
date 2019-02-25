@@ -4,7 +4,7 @@
     <PackAsTool>true</PackAsTool>
     <IsPackable>true</IsPackable>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <RootNamespace>JetBrains.RunAs</RootNamespace>
     <AssemblyName>dotnet-runas</AssemblyName>
     <PackageId>dotnet-runas</PackageId>
