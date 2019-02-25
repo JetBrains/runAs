@@ -19,6 +19,8 @@
             catch (ToolException parseException)
             {
                 System.Console.Error.WriteLine(parseException.Message);
+                System.Console.WriteLine("Usage: dotnet runas -u:username -p:password [dotnet CLI command and arguments]");
+                System.Console.WriteLine("Example: dotnet runas -u:TestUser -p:MyPassword test MyTest.csproj -c release");
                 return 1;
             }
         }
