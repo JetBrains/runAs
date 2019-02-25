@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Linux
 # runAs (settings_file_name, command, bitness, password)
 if [ $# -eq 4 ];
 then
