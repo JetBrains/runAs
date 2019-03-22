@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("JetBrains.runAs.IntegrationTests")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("Copyright © 2015-2019 JetBrains. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
